@@ -122,15 +122,29 @@ body{background:#0C0C0E;margin:0;font-family:"Inter",system-ui,-apple-system,san
 #d3 .meter .mt i{display:block;height:100%;border-radius:999px;background:var(--ac)}
 #d3 .viz-meters .scale{display:none}
 
-/* d4 · micro columns */
-#d4 .viz-cols{display:flex;flex-direction:column;gap:20px}
-#d4 .viz-cols .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-#d4 .viz-cols .gr{display:flex;flex-direction:column;gap:2px;min-width:0}
-#d4 .viz-cols .gr .k{font-size:12px;color:var(--tx3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#d4 .viz-cols .gr b{font-size:23px;font-weight:600;letter-spacing:-.035em;color:var(--tx);line-height:1.15}
-#d4 .viz-cols .gr .d{font-size:12px;font-weight:500}
-#d4 .viz-cols .ch{min-width:0;width:100%}
-#d4 .viz-cols .ch svg{display:block;width:100%;height:96px}
+/* d4 · estate composition */
+#d4 .viz-estate{display:flex;flex-direction:column;gap:16px}
+#d4 .viz-estate .hero{display:flex;flex-direction:column;gap:3px}
+#d4 .viz-estate .hero b{font-size:40px;font-weight:600;letter-spacing:-.045em;line-height:1;color:var(--tx)}
+#d4 .viz-estate .hero span{font-size:12.5px;color:var(--tx3)}
+#d4 .eb{display:flex;height:10px;border-radius:999px;overflow:hidden;background:#E8EDF5;gap:2px}
+#d4 .eb span{display:block;height:100%}
+#d4 .eb .s-in{background:#2563EB}
+#d4 .eb .s-oo{background:#93B4FB}
+#d4 .eb .s-no{background:#E8EDF5}
+#d4 .eb .s-un{background:repeating-linear-gradient(135deg,#C7D6F5 0 5px,#E8EDF5 5px 10px)}
+#d4 .elg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--tx3)}
+#d4 .elg span{display:inline-flex;align-items:center;gap:6px}
+#d4 .elg b{font-weight:600;color:var(--tx)}
+#d4 .elg i{width:8px;height:8px;border-radius:3px;display:block}
+#d4 .elg .i-in{background:#2563EB}
+#d4 .elg .i-oo{background:#93B4FB}
+#d4 .elg .i-no{background:#E8EDF5}
+#d4 .viz-estate .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding-top:16px;border-top:1px solid var(--line2);margin-top:auto}
+#d4 .viz-estate .gr{display:flex;flex-direction:column;gap:1px;min-width:0}
+#d4 .viz-estate .gr .k{font-size:12px;color:var(--tx3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#d4 .viz-estate .gr b{font-size:19px;font-weight:600;letter-spacing:-.03em;color:var(--tx);line-height:1.2}
+#d4 .viz-estate .gr .d{font-size:11.5px;font-weight:500}
 @media (max-width:1220px){#d2 .viz-donut{grid-template-columns:1fr}}
 
 .dir .pc-ft{display:flex;align-items:baseline;justify-content:space-between;padding-top:18px;border-top:1px solid var(--line2)}
@@ -672,34 +686,38 @@ function cardSlate(p){
     '<div class="scale"><span>0%</span><span>50%</span><span>100%</span></div></div>';
 }
 
-/* 4 · GRAPHITE — metric row + full-width micro column chart */
+/* 4 · GRAPHITE — estate composition bar
+   Splits all 3,997 stores into: selling now, listed but out of stock,
+   and not listed at all. Says something the four numbers cannot. */
 function cardGraphite(p){
-  var W = 320, H = 96, base = H - 20, cols = [["List", p.list], ["DSA", p.dsa], ["Wt. DSA", p.wdsa]];
-  var slot = W / 3, bw = 26, g = "";
-  g += '<line x1="0" y1="' + base + '" x2="' + W + '" y2="' + base + '" stroke="#EEF1F5" stroke-width="1"/>';
-  cols.forEach(function(cm, i){
-    var cxc = slot * i + slot / 2, x = cxc - bw / 2, v = cm[1];
-    if (v === null){
-      g += '<rect x="' + x + '" y="' + (base - 54) + '" width="' + bw + '" height="54" rx="13" fill="none" stroke="#E4E9F0" stroke-width="1" stroke-dasharray="3 4"/>' +
-           '<text x="' + cxc + '" y="' + (base - 24) + '" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#8792A3">—</text>';
-    } else {
-      var h = (v / 100) * 58;
-      g += '<rect x="' + x + '" y="' + (base - h) + '" width="' + bw + '" height="' + h + '" rx="13" fill="#2563EB"/>' +
-           '<text x="' + cxc + '" y="' + (base - h - 7) + '" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" font-weight="600" letter-spacing="-0.3" fill="#0B0F16">' + v.toFixed(1) + "</text>";
-    }
-    g += '<text x="' + cxc + '" y="' + (base + 14) + '" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="#8792A3">' + cm[0] + "</text>";
-  });
-  var chart = '<svg viewBox="0 0 ' + W + " " + H + '" width="100%" height="' + H + '" preserveAspectRatio="none" role="img" aria-label="DS listing ' +
-    p.list.toFixed(1) + ' percent, DSA ' + (p.dsa === null ? "not available" : p.dsa.toFixed(1) + " percent") + '">' + g + "</svg>";
+  var selling = p.dsa === null ? null : (p.list * p.dsa) / 100;
+  var oos     = selling === null ? null : p.list - selling;
+  var unlisted = 100 - p.list;
+
+  var bar = '<div class="eb">' +
+    (selling === null
+      ? '<span class="s-un" style="width:' + p.list + '%"></span>'
+      : '<span class="s-in" style="width:' + selling.toFixed(1) + '%"></span>' +
+        '<span class="s-oo" style="width:' + oos.toFixed(1) + '%"></span>') +
+    '<span class="s-no" style="width:' + unlisted.toFixed(1) + '%"></span></div>';
+
+  var legend = '<div class="elg">' +
+    '<span><i class="i-in"></i>Selling <b>' + (selling === null ? "—" : selling.toFixed(1) + "%") + "</b></span>" +
+    '<span><i class="i-oo"></i>Out of stock <b>' + (oos === null ? "—" : oos.toFixed(1) + "%") + "</b></span>" +
+    '<span><i class="i-no"></i>Not listed <b>' + unlisted.toFixed(1) + "%</b></span></div>";
 
   function r(label, val, d){
     var o = dv(d, "pp");
     return '<div class="gr"><span class="k">' + label + "</span><b>" + val + "</b>" +
       '<span class="d ' + (o ? o.cls : "nu") + '">' + (o ? o.t : "—") + "</span></div>";
   }
-  return '<div class="viz viz-cols"><div class="grid">' + r("Assortment", String(p.assort), null) + r("DS Listing", pv(p.list), p.dList) +
-    r("DSA", pv(p.dsa), p.dDsa) + r("Wt. DSA", pv(p.wdsa), p.dWdsa) + "</div>" +
-    '<div class="ch">' + chart + "</div></div>";
+
+  return '<div class="viz viz-estate">' +
+    '<div class="hero"><b>' + (selling === null ? "—" : selling.toFixed(1) + "%") + "</b>" +
+      "<span>of " + D.meta.stores + " dark stores are listed and in stock</span></div>" +
+    bar + legend +
+    '<div class="grid">' + r("Assortment", String(p.assort), null) + r("DS Listing", pv(p.list), p.dList) +
+      r("DSA", pv(p.dsa), p.dDsa) + r("Wt. DSA", pv(p.wdsa), p.dWdsa) + "</div></div>";
 }
 
 var CARDS = { d1: cardObsidian, d2: cardUntitled, d3: cardSlate, d4: cardGraphite };
@@ -798,7 +816,7 @@ function mapPanel(){
     t1: '<b>Obsidian</b> — near-black canvas, one warm amber accent, thin ring dials. No borders anywhere: depth comes from surface tint alone. Charcoal sidebar, large light-weight numerals, generous space.',
     t2: '<b>Untitled UI</b> — the library’s own system: Inter, violet primary, soft pill controls, 16px surfaces, badges with a leading dot, and a shelf-coverage donut per platform. The most familiar of the four.',
     t3: '<b>Slate</b> — warm stone ground with white surfaces, deep green accent, 22px radii. Capsule meters make each percentage readable without a chart. The calmest and most spacious.',
-    t4: '<b>Graphite</b> — white with tinted zones instead of outlined cards, electric blue, a micro column chart per platform, and a geographic city map in place of the heat grid. The most compact.'
+    t4: '<b>Graphite</b> — white with tinted zones instead of outlined cards, electric blue. Each card splits the whole estate into selling / out of stock / not listed, and the heat grid is replaced by a geographic city map. The most compact.'
   };
 
   ['d1','d2','d3','d4'].forEach(function(id){
