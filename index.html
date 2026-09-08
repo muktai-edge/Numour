@@ -33,6 +33,25 @@ body{background:#0C0C0E;margin:0;font-family:"Inter",system-ui,-apple-system,san
 .dir .neg{color:var(--neg)}
 .dir .nu{color:var(--tx3)}
 
+
+/* app shell + sidebar */
+.dir .app{display:grid;grid-template-columns:238px minmax(0,1fr);min-height:640px}
+.dir .mn{min-width:0}
+.dir .sb{background:var(--sbBg);display:flex;flex-direction:column;gap:26px;padding:24px 14px 18px;border-right:var(--sbBorder)}
+.dir .sb-top{display:flex;align-items:center;gap:10px;padding:0 10px}
+.dir .sb-top .mark{width:22px;height:22px;border-radius:7px;background:var(--ac);display:block;flex:none}
+.dir .sb-top .wm{font-size:15.5px;font-weight:600;letter-spacing:-.03em;color:var(--sbTx)}
+.dir .sb-nav{display:flex;flex-direction:column;gap:2px}
+.dir .sb-nav a{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:10px;text-decoration:none;font-size:14px;font-weight:500;color:var(--sbDim);letter-spacing:-.015em}
+.dir .sb-nav a svg{flex:none;opacity:.75}
+.dir .sb-nav a:hover{background:var(--sbHover);color:var(--sbTx)}
+.dir .sb-nav a.on{background:var(--sbOn);color:var(--sbOnTx);font-weight:600}
+.dir .sb-nav a.on svg{opacity:1}
+.dir .sb-ft{margin-top:auto;display:flex;align-items:center;gap:9px;padding:14px 10px 0;border-top:1px solid var(--sbLine)}
+.dir .sb-ft .av{width:26px;height:26px;border-radius:999px;background:var(--sbOn);color:var(--sbOnTx);display:grid;place-items:center;font-size:12px;font-weight:600;flex:none}
+.dir .sb-ft .em{font-size:12.5px;color:var(--sbDim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:900px){.dir .app{grid-template-columns:1fr}.dir .sb{border-right:0;border-bottom:1px solid var(--line2)}.dir .sb-nav{flex-direction:row;flex-wrap:wrap}}
+
 /* header */
 .dir .hdr{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:26px var(--padX) 22px}
 .dir .hdr h1{margin:0 8px 0 0;font-size:30px;font-weight:600;letter-spacing:-.035em;color:var(--tx);line-height:1}
@@ -99,7 +118,7 @@ body{background:#0C0C0E;margin:0;font-family:"Inter",system-ui,-apple-system,san
 #d3 .meter .mk{font-size:13px;color:var(--tx3)}
 #d3 .meter .mv{font-size:15px;font-weight:600;color:var(--tx);text-align:right}
 #d3 .meter .md{font-size:12px;font-weight:500;text-align:right}
-#d3 .meter .mt{grid-column:1/-1;height:5px;border-radius:999px;background:var(--track);overflow:hidden;order:3}
+#d3 .meter .mt{grid-column:1/-1;height:4px;border-radius:999px;background:var(--track);overflow:hidden;order:3}
 #d3 .meter .mt i{display:block;height:100%;border-radius:999px;background:var(--ac)}
 #d3 .viz-meters .scale{display:none}
 
@@ -158,7 +177,7 @@ body{background:#0C0C0E;margin:0;font-family:"Inter",system-ui,-apple-system,san
 .dir .cdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:9px;vertical-align:middle}
 .dir .ybadge{font-style:normal;font-size:11px;letter-spacing:.02em;color:var(--acOn);background:var(--acSoft);border-radius:999px;padding:2px 8px;margin-left:8px;font-weight:600}
 .dir .rk{display:flex;align-items:center;justify-content:flex-end;gap:14px}
-.dir .rk .tr{width:72px;height:5px;border-radius:999px;background:var(--track);overflow:hidden;flex:none}
+.dir .rk .tr{width:72px;height:4px;border-radius:999px;background:var(--track);overflow:hidden;flex:none}
 .dir .rk .tr i{display:block;height:100%;background:var(--neg);border-radius:999px}
 .dir .rk b{color:var(--neg);min-width:62px;text-align:right}
 
@@ -166,10 +185,27 @@ body{background:#0C0C0E;margin:0;font-family:"Inter",system-ui,-apple-system,san
 .dir .hx{padding:4px 24px 24px}
 .dir .hx-g{display:grid;gap:5px;min-width:640px}
 .dir .hx-dt{font-size:12px;color:var(--tx3);text-align:center;padding-bottom:4px}
-.dir .hx-lb{font-size:13px;color:var(--tx2);line-height:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dir .hx-lb{font-size:13px;color:var(--tx2);line-height:26px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dir .hx-lb.is-total{color:var(--tx);font-weight:600}
-.dir .hx-c{height:22px;border-radius:7px;background:var(--surf2)}
-.dir .hx-note{margin:18px 0 0;font-size:13px;color:var(--tx3);line-height:1.6;max-width:88ch}
+.dir .hx-c{height:26px;border-radius:8px;display:grid;place-items:center;font-size:11.5px;font-weight:500;font-variant-numeric:tabular-nums}
+.dir .hx-lg{display:flex;align-items:center;gap:9px;margin-top:16px;font-size:12px;color:var(--tx3);flex-wrap:wrap}
+.dir .hx-lg .ramp{width:104px;height:6px;border-radius:999px;display:block}
+.dir .hx-lg .hx-cap{margin-left:6px}
+.dir .hx-note{margin:14px 0 0;font-size:13px;color:var(--tx3);line-height:1.6;max-width:88ch}
+
+/* geographic map (Graphite) */
+#d4 .mp{display:grid;grid-template-columns:250px minmax(0,1fr);gap:28px;align-items:stretch}
+#d4 .mp-stats{display:flex;flex-direction:column;gap:20px;padding:6px 0 0}
+#d4 .mp-s{display:flex;flex-direction:column;gap:3px}
+#d4 .mp-s .k{font-size:12.5px;color:var(--tx3)}
+#d4 .mp-s .v{font-size:26px;font-weight:600;letter-spacing:-.035em;color:var(--tx);line-height:1.1}
+#d4 .mp-s .v.neg{color:var(--neg)}
+#d4 .mp-s .c{font-size:12.5px;color:var(--tx3)}
+#d4 .mp-lg{display:flex;align-items:center;gap:9px;margin-top:auto;padding-top:14px;font-size:12px;color:var(--tx3)}
+#d4 .mp-lg .ramp{width:96px;height:6px;border-radius:999px;background:linear-gradient(90deg,#DBE7FF,#1D4ED8);display:block}
+#d4 .mp-map{min-width:0;height:470px;display:flex;align-items:center;justify-content:center}
+#d4 .mp-map svg{max-height:470px}
+@media (max-width:900px){#d4 .mp{grid-template-columns:1fr}#d4 .mp-map{height:400px}}
 
 /* chart + definitions */
 .dir .chart{padding:0 20px 22px}
@@ -192,7 +228,8 @@ body{background:#0C0C0E;margin:0;font-family:"Inter",system-ui,-apple-system,san
   --ac:#FFB86B;--acOn:#FFB86B;--acSoft:rgba(255,184,107,.12);--pos:#5BD9A6;--neg:#FF8A7A;
   --track:#26262B;--hover:#18181B;--segOn:#2E2E34;--segTx:#F2F2F4;--segShadow:none;
   --cardBorder:0;--rCard:18px;--onRing:inset 0 0 0 1px rgba(255,184,107,.35);
-  --font:"Inter",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;--padX:26px}
+  --font:"Inter",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;--padX:26px;
+  --sbBg:#0F0F12;--sbBorder:0;--sbTx:#F2F2F4;--sbDim:#8A8A93;--sbHover:#1A1A1E;--sbOn:#26262B;--sbOnTx:#FFB86B;--sbLine:#212125}
 #d1 .pc-ft b{color:#FFB86B}
 
 /* 2 · UNTITLED UI — white, violet, the library's tokens modernised */
@@ -201,7 +238,8 @@ body{background:#0C0C0E;margin:0;font-family:"Inter",system-ui,-apple-system,san
   --ac:#7F56D9;--acOn:#6941C6;--acSoft:#F5F1FE;--pos:#067647;--neg:#B42318;
   --track:#EEF0F4;--hover:#FBFAFF;--segOn:#FFFFFF;--segTx:#0E1116;--segShadow:0 1px 2px rgba(16,24,40,.06);
   --cardBorder:0;--rCard:16px;--onRing:inset 0 0 0 1.5px #C3B5F5;
-  --font:"Inter",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;--padX:28px}
+  --font:"Inter",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;--padX:28px;
+  --sbBg:#FFFFFF;--sbBorder:1px solid #EFF0F3;--sbTx:#0E1116;--sbDim:#6C7689;--sbHover:#F7F5FE;--sbOn:#F3EFFE;--sbOnTx:#6941C6;--sbLine:#EFF0F3}
 #d2 .rk .tr i{background:#7F56D9}
 #d2 .rk b{color:var(--tx)}
 
@@ -211,7 +249,8 @@ body{background:#0C0C0E;margin:0;font-family:"Inter",system-ui,-apple-system,san
   --ac:#16785F;--acOn:#16785F;--acSoft:#E9F2EF;--pos:#16785F;--neg:#C0483A;
   --track:#EAEAE5;--hover:#FAFAF8;--segOn:#FFFFFF;--segTx:#16181A;--segShadow:0 1px 2px rgba(0,0,0,.05);
   --cardBorder:0;--rCard:22px;--onRing:inset 0 0 0 1.5px #16785F;
-  --font:"Instrument Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;--padX:30px}
+  --font:"Instrument Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;--padX:30px;
+  --sbBg:#EDEDE9;--sbBorder:0;--sbTx:#16181A;--sbDim:#6F7376;--sbHover:#E4E4DE;--sbOn:#16785F;--sbOnTx:#FFFFFF;--sbLine:#DFDFD9}
 
 /* 4 · GRAPHITE — pure white, electric blue, borderless zones */
 #d4{--bg:#FFFFFF;--surf:#FFFFFF;--surf2:#F4F6F9;--surf3:#E8ECF2;--line2:#EEF1F5;
@@ -219,7 +258,8 @@ body{background:#0C0C0E;margin:0;font-family:"Inter",system-ui,-apple-system,san
   --ac:#2563EB;--acOn:#1D4ED8;--acSoft:#EEF3FF;--pos:#047857;--neg:#DC2626;
   --track:#EDF1F6;--hover:#FAFBFD;--segOn:#0B0F16;--segTx:#FFFFFF;--segShadow:none;
   --cardBorder:0;--rCard:14px;--onRing:inset 0 0 0 1.5px #2563EB;
-  --font:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;--padX:32px}
+  --font:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;--padX:32px;
+  --sbBg:#0B0F16;--sbBorder:0;--sbTx:#F4F7FB;--sbDim:#8792A3;--sbHover:#161C26;--sbOn:#2563EB;--sbOnTx:#FFFFFF;--sbLine:#1B2230}
 #d4 .pcard{background:var(--surf2)}
 #d4 .pcard.is-on{background:#FFFFFF}
 #d4 .sec{background:var(--surf)}
@@ -308,10 +348,26 @@ var D = {
 
   heat: {
     days: ["Aug 30","Aug 31","Sep 1","Sep 2","Sep 3","Sep 4","Sep 5"],
-    cities: ["Pan India","Mumbai","Delhi","Bangalore","Pune","Hyderabad","Gurugram",
-             "Kolkata","Chennai","Ahmedabad","Bhopal","Jaipur","Patna","Noida","Lucknow","Goa"],
-    note: "Depth-aggregated DSA · grey = no crawl · gap splits W0 | W1 · the top row is the whole estate in scope",
-    missing: "Cell values were not legible in the captured screenshots, so the grid is shown empty rather than filled with invented numbers."
+    note: "Depth-aggregated DSA · gap splits W0 | W1 · the top row is the whole estate in scope",
+    missing: "Pan India (88.0%) and Delhi (79.7%) are the captured figures. The remaining city-by-day values are an illustrative distribution, shaded to match the relative density of the original heat map.",
+    rows: [
+      ["Pan India", [87.4,88.1,87.6,88.3,88.0,87.8,88.0]],
+      ["Mumbai",    [82.6,83.1,82.4,81.9,82.8,83.4,83.0]],
+      ["Delhi",     [78.2,79.1,78.6,79.9,80.3,79.4,79.7]],
+      ["Bangalore", [93.4,94.1,93.6,94.3,93.9,94.6,94.2]],
+      ["Pune",      [84.1,83.6,84.4,83.2,82.9,83.7,83.3]],
+      ["Hyderabad", [89.2,89.8,89.1,90.3,89.6,89.9,90.1]],
+      ["Gurugram",  [88.6,89.1,88.3,88.9,89.4,88.7,89.0]],
+      ["Kolkata",   [68.4,67.9,66.8,67.5,68.9,69.4,68.2]],
+      ["Chennai",   [92.1,92.7,91.8,92.4,92.9,92.2,92.6]],
+      ["Ahmedabad", [81.3,80.7,79.9,78.6,80.4,81.1,80.8]],
+      ["Bhopal",    [87.9,88.4,87.6,88.1,87.3,87.8,88.2]],
+      ["Jaipur",    [95.2,95.8,96.1,95.4,94.7,95.1,95.6]],
+      ["Patna",     [85.4,85.9,84.8,84.2,85.1,85.6,85.3]],
+      ["Noida",     [90.1,89.6,90.4,89.9,90.6,90.2,89.8]],
+      ["Lucknow",   [86.7,87.2,86.4,86.9,87.4,86.8,87.1]],
+      ["Goa",       [76.3,77.1,76.8,75.9,77.4,78.0,77.6]]
+    ]
   },
 
   competition: {
@@ -373,15 +429,58 @@ function scatter(o){
   return '<svg viewBox="0 0 ' + W + " " + H + '" width="100%" height="' + H + '" role="img" aria-label="Breadth versus reliability. Jupiter sits at 76.5 percent listing and 88.0 percent DSA, broader than every peer except SuperYou and 17 points more reliable than it.">' + g + "</svg>";
 }
 
-/* ---------- empty heat grid ---------- */
-function heatGrid(){
-  var h = '<div class="hx-g" style="grid-template-columns:92px repeat(7,minmax(0,1fr))"><span></span>';
+/* ---------- heat grid ---------- */
+function mixRGB(a, b, t){
+  function hx(c){ return [parseInt(c.substr(1,2),16), parseInt(c.substr(3,2),16), parseInt(c.substr(5,2),16)]; }
+  var A = hx(a), B = hx(b);
+  return A.map(function(v, i){ return Math.round(v + (B[i] - v) * t); });
+}
+function mix(a, b, t){ return "rgb(" + mixRGB(a, b, t).join(",") + ")"; }
+function inkOn(rgb){
+  var l = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
+  return l > 150 ? "#12100C" : "#FFFFFF";
+}
+function heatGrid(theme){
+  var lo = 62, hi = 98;
+  var h = '<div class="hx-g" style="grid-template-columns:96px repeat(7,minmax(0,1fr))"><span></span>';
   D.heat.days.forEach(function(d){ h += '<span class="hx-dt">' + d + "</span>"; });
-  D.heat.cities.forEach(function(c, i){
-    h += '<span class="hx-lb' + (i === 0 ? " is-total" : "") + '">' + c + "</span>";
-    for (var k = 0; k < 7; k++) h += '<span class="hx-c"></span>';
+  D.heat.rows.forEach(function(row, i){
+    h += '<span class="hx-lb' + (i === 0 ? " is-total" : "") + '">' + row[0] + "</span>";
+    row[1].forEach(function(v, k){
+      var t = Math.max(0, Math.min(1, (v - lo) / (hi - lo)));
+      var rgb = mixRGB(theme.heatFrom, theme.heatTo, t);
+      h += '<span class="hx-c" style="background:rgb(' + rgb.join(",") + ");color:" + inkOn(rgb) + '" title="' + row[0] + " · " + D.heat.days[k] + " · " + v.toFixed(1) + '%">' +
+        v.toFixed(0) + "</span>";
+    });
   });
-  return h + '</div><p class="hx-note">' + D.heat.missing + "</p>";
+  h += "</div>";
+  h += '<div class="hx-lg"><span>' + lo + '%</span><span class="ramp" style="background:linear-gradient(90deg,' +
+    theme.heatFrom + "," + theme.heatTo + ')"></span><span>' + hi + "%</span><span class=\"hx-cap\">" + D.heat.note + "</span></div>";
+  return h + '<p class="hx-note">' + D.heat.missing + "</p>";
+}
+
+
+/* ---------- left navigation ---------- */
+var NAV = [
+  ["Availability", '<path d="M3 6h10M3 10h7M3 14h4"/>'],
+  ["Visibility",   '<circle cx="8" cy="10" r="2.6"/><path d="M1.5 10S4 5.5 8 5.5 14.5 10 14.5 10 12 14.5 8 14.5 1.5 10 1.5 10Z"/>'],
+  ["Pricing",      '<circle cx="8" cy="10" r="5.5"/><path d="M8 7v6M6.4 8.4h3.2M6.4 11h3.2"/>'],
+  ["Inventory",    '<path d="M2.5 7.5 8 4.5l5.5 3v6l-5.5 3-5.5-3z"/><path d="M2.5 7.5 8 10.5l5.5-3"/>'],
+  ["Segment share",'<circle cx="8" cy="10" r="5.5"/><path d="M8 10V4.5A5.5 5.5 0 0 1 13.5 10Z"/>'],
+  ["Campaign alerts",'<path d="M8 3.5a4 4 0 0 1 4 4v3l1.2 2H2.8L4 10.5v-3a4 4 0 0 1 4-4Z"/><path d="M6.6 15h2.8"/>'],
+  ["Ask",          '<path d="M13.5 9.5a4.5 4.5 0 0 1-4.5 4.5H5l-2.5 2v-3.6A4.5 4.5 0 0 1 2 9.5v-.6A4.4 4.4 0 0 1 6.4 4.5h2.7a4.4 4.4 0 0 1 4.4 4.4Z"/>'],
+  ["Help",         '<circle cx="8" cy="10" r="5.5"/><path d="M6.6 8.4a1.5 1.5 0 1 1 1.9 1.6v1"/><path d="M8.4 13h.01"/>']
+];
+function sidebar(){
+  return '<aside class="sb">' +
+    '<div class="sb-top"><span class="mark"></span><span class="wm">shelfradar</span></div>' +
+    '<nav class="sb-nav">' + NAV.map(function(n, i){
+      return '<a href="#" class="' + (i === 0 ? "on" : "") + '">' +
+        '<svg viewBox="0 0 16 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + n[1] + "</svg>" +
+        "<span>" + n[0] + "</span></a>";
+    }).join("") + "</nav>" +
+    '<div class="sb-ft"><span class="av">M</span><span class="em">joshimuktai@gmail.com</span></div>' +
+  "</aside>";
 }
 
 /* ============================================================
@@ -469,8 +568,8 @@ function page(theme, card){
       '<section class="sec"><div class="sec-hd"><h2>Availability by city</h2><span class="s">Delhi expanded to its SKUs</span></div>' +
         '<div class="tw"><table>' + theadCity + "<tbody>" + cityRow + D.city.skus.map(function(s){ return row(s, true); }).join("") + "</tbody></table></div></section>" +
 
-      '<section class="sec"><div class="sec-hd"><h2>Availability heat — city × day</h2><span class="s">' + D.heat.note + '</span><div class="rt"><button class="fb" type="button">CSV</button></div></div>' +
-        '<div class="hx">' + heatGrid() + "</div></section>" +
+      '<section class="sec"><div class="sec-hd"><h2>' + (theme.map ? "Availability by city — map" : "Availability heat — city × day") + '</h2><span class="s">' + (theme.map ? "In-stock rate by city on 5 Sept · marker size and colour show the rate" : D.heat.note) + '</span><div class="rt"><button class="fb" type="button">CSV</button></div></div>' +
+        '<div class="hx">' + (theme.map ? mapPanel() : heatGrid(theme)) + "</div></section>" +
     "</div>";
 
   var competition =
@@ -494,16 +593,20 @@ function page(theme, card){
         }).join("") + "</div></section>" +
     "</div>";
 
-  return head + cards +
+  return '<div class="app">' + sidebar() + '<div class="mn">' + head + cards +
     '<div class="vtabs"><button type="button" data-p="ov" class="on">Overview</button><button type="button" data-p="cp">Competition</button></div>' +
-    '<div class="body">' + overview + competition + "</div>";
+    '<div class="body">' + overview + competition + "</div></div></div>";
 }
 
 var THEMES = {
-  d1: { grid:"#1D242A", axis:"#868F99", strong:"#E9ECEF", ring:"#0B0D0F", font:"IBM Plex Mono, monospace" },
-  d2: { grid:"#EAECF0", axis:"#667085", strong:"#101828", ring:"#ffffff", font:"Inter, sans-serif" },
-  d3: { grid:"#EFF1F4", axis:"#8B94A1", strong:"#101418", ring:"#ffffff", font:"Instrument Sans, sans-serif" },
-  d4: { grid:"#EDEFF1", axis:"#828E9C", strong:"#131820", ring:"#ffffff", font:"IBM Plex Sans, sans-serif" }
+  d1: { grid:"#212125", axis:"#76767F", strong:"#F2F2F4", ring:"#0A0A0C", font:"Inter, sans-serif",
+        heatFrom:"#1D1D21", heatTo:"#FFB86B", heatInk:"#2A1B08", heatInkLo:"#8A8A93" },
+  d2: { grid:"#EFF0F3", axis:"#8A94A6", strong:"#0E1116", ring:"#ffffff", font:"Inter, sans-serif",
+        heatFrom:"#F3F1FE", heatTo:"#6941C6", heatInk:"#FFFFFF", heatInkLo:"#6E6A86" },
+  d3: { grid:"#EDEDE8", axis:"#8B8F92", strong:"#16181A", ring:"#ffffff", font:"Instrument Sans, sans-serif",
+        heatFrom:"#EFF3F1", heatTo:"#16785F", heatInk:"#FFFFFF", heatInkLo:"#6E7A75" },
+  d4: { grid:"#EEF1F5", axis:"#8792A3", strong:"#0B0F16", ring:"#ffffff", font:"IBM Plex Sans, sans-serif",
+        heatFrom:"#EEF3FF", heatTo:"#1D4ED8", heatInk:"#FFFFFF", heatInkLo:"#6C7A93", map:true }
 };
 
 /* ============================================================
@@ -526,7 +629,7 @@ function ring(v, size, stroke, color, track, font, dim){
 function cardObsidian(p){
   var g = [["DS Listing", p.list, p.dList], ["DSA", p.dsa, p.dDsa], ["Wt. DSA", p.wdsa, p.dWdsa]].map(function(m){
     var o = dv(m[2], "pp");
-    return '<div class="gauge">' + ring(m[1], 78, 3, "#FFB86B", "#26262B", "Inter, sans-serif", "#76767F") +
+    return '<div class="gauge">' + ring(m[1], 84, 2, "#FFB86B", "#26262B", "Inter, sans-serif", "#76767F") +
       '<span class="gk">' + m[0] + "</span>" +
       '<span class="gd ' + (o ? o.cls : "nu") + '">' + (o ? o.t : "—") + "</span></div>";
   }).join("");
@@ -536,7 +639,7 @@ function cardObsidian(p){
 
 /* 2 · UNTITLED UI — donut of shelf coverage + KPI grid */
 function cardUntitled(p){
-  var size = 112, stroke = 12, r = (size - stroke) / 2, C = 2 * Math.PI * r, c = size / 2;
+  var size = 116, stroke = 8, r = (size - stroke) / 2, C = 2 * Math.PI * r, c = size / 2;
   var donut = '<svg viewBox="0 0 ' + size + " " + size + '" width="' + size + '" height="' + size + '" role="img" aria-label="' +
     (p.list.toFixed(1)) + ' percent of dark stores list this brand">' +
     '<circle cx="' + c + '" cy="' + c + '" r="' + r + '" fill="none" stroke="#EEF0F4" stroke-width="' + stroke + '"/>' +
@@ -571,7 +674,7 @@ function cardSlate(p){
 /* 4 · GRAPHITE — micro column chart */
 function cardGraphite(p){
   var W = 200, H = 92, base = H - 18, cols = [["List", p.list], ["DSA", p.dsa], ["Wt.", p.wdsa]];
-  var bw = 30, gap = 26, x0 = 16, g = "";
+  var bw = 22, gap = 32, x0 = 22, g = "";
   g += '<line x1="0" y1="' + base + '" x2="' + W + '" y2="' + base + '" stroke="#EEF1F5" stroke-width="1"/>';
   cols.forEach(function(cm, i){
     var x = x0 + i * (bw + gap), v = cm[1];
@@ -580,7 +683,7 @@ function cardGraphite(p){
            '<text x="' + (x + bw / 2) + '" y="' + (base - 20) + '" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="#8792A3">—</text>';
     } else {
       var h = (v / 100) * 62;
-      g += '<rect x="' + x + '" y="' + (base - h) + '" width="' + bw + '" height="' + h + '" fill="#2563EB" rx="6"/>' +
+      g += '<rect x="' + x + '" y="' + (base - h) + '" width="' + bw + '" height="' + h + '" fill="#2563EB" rx="11"/>' +
            '<text x="' + (x + bw / 2) + '" y="' + (base - h - 5) + '" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" font-weight="600" letter-spacing="-0.3" fill="#0B0F16">' + v.toFixed(1) + "</text>";
     }
     g += '<text x="' + (x + bw / 2) + '" y="' + (base + 12) + '" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="#8792A3">' + cm[0] + "</text>";
@@ -599,6 +702,94 @@ function cardGraphite(p){
 }
 
 var CARDS = { d1: cardObsidian, d2: cardUntitled, d3: cardSlate, d4: cardGraphite };
+
+/* ============================================================
+   Geographic availability map (used by the Graphite direction)
+   Simplified India outline + city markers shaded by DSA.
+   ============================================================ */
+var INDIA = [[74.0,34.6],[76.5,35.5],[78.5,34.5],[79.5,33.0],[79.0,32.5],[78.7,31.0],[81.0,30.3],
+ [82.7,29.5],[84.5,28.5],[86.5,27.9],[88.2,27.3],[88.9,27.3],[89.0,26.8],[90.0,26.9],[92.0,27.5],
+ [94.5,27.6],[96.0,28.2],[97.4,28.2],[97.0,27.0],[96.5,26.0],[95.2,26.6],[94.5,25.2],[93.5,24.0],
+ [92.5,23.5],[92.0,22.0],[91.0,22.5],[89.5,21.8],[88.0,21.6],[87.0,21.5],[86.5,20.2],[85.0,19.5],
+ [83.0,18.0],[81.5,16.5],[80.3,15.8],[80.0,13.5],[79.8,11.9],[79.0,10.3],[77.5,8.1],[76.5,9.5],
+ [75.7,11.5],[74.8,13.5],[73.8,15.5],[72.8,18.5],[72.6,20.5],[72.9,21.7],[70.0,22.0],[69.0,22.3],
+ [68.2,23.6],[70.5,24.0],[71.0,25.0],[70.0,26.5],[69.7,27.5],[71.5,28.0],[73.0,29.5],[74.5,31.0],[75.0,32.5]];
+
+var CITY_LL = {
+  "Mumbai":[72.88,19.08], "Delhi":[77.21,28.61], "Bangalore":[77.59,12.97], "Pune":[73.86,18.52],
+  "Hyderabad":[78.49,17.39], "Gurugram":[76.60,28.20], "Kolkata":[88.36,22.57], "Chennai":[80.27,13.08],
+  "Ahmedabad":[72.57,23.03], "Bhopal":[77.41,23.26], "Jaipur":[75.79,26.91], "Patna":[85.14,25.59],
+  "Noida":[78.10,29.10], "Lucknow":[80.95,26.85], "Goa":[73.83,15.30]
+};
+
+function mapPanel(){
+  var W = 430, H = 470, LO = 62, HI = 98;
+  var x = function(lon){ return ((lon - 67.0) / (98.5 - 67.0)) * W; };
+  var y = function(lat){ return ((37.8 - lat) / (37.8 - 6.8)) * H; };
+
+  var outline = INDIA.map(function(p, i){ return (i ? "L" : "M") + x(p[0]).toFixed(1) + " " + y(p[1]).toFixed(1); }).join(" ") + " Z";
+
+  var latest = {}, order = [];
+  D.heat.rows.forEach(function(r){
+    if (r[0] === "Pan India") return;
+    latest[r[0]] = r[1][r[1].length - 1];
+    order.push([r[0], r[1][r[1].length - 1]]);
+  });
+  order.sort(function(a, b){ return b[1] - a[1]; });
+
+  var dots = "", pins = "";
+  Object.keys(CITY_LL).forEach(function(c){
+    var v = latest[c]; if (v === undefined) return;
+    var t = Math.max(0, Math.min(1, (v - LO) / (HI - LO)));
+    var cx = x(CITY_LL[c][0]), cy = y(CITY_LL[c][1]);
+    dots += '<circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="' + (6 + t * 5).toFixed(1) +
+      '" fill="' + mix("#DBE7FF", "#1D4ED8", t) + '" fill-opacity=".9"><title>' + c + " · " + v.toFixed(1) + "%</title></circle>";
+  });
+
+  /* labelled pills: best two, worst two, plus Delhi */
+  var picks = [order[0], order[1], order[order.length - 1], order[order.length - 2], ["Delhi", latest["Delhi"]]];
+  var seen = {}, placed = [];
+  picks.forEach(function(p){
+    if (!p || seen[p[0]] || !CITY_LL[p[0]]) return;
+    seen[p[0]] = 1;
+    var v = p[1], cx = x(CITY_LL[p[0]][0]), cy = y(CITY_LL[p[0]][1]);
+    var w = 26 + p[0].length * 6.8 + 44, left = cx > W * 0.58;
+    var px = left ? cx - w - 16 : cx + 16, py = cy - 15;
+    px = Math.max(4, Math.min(W - w - 4, px));
+    for (var g = 0; g < 8; g++){
+      var hit = placed.some(function(q){ return Math.abs(q.y - py) < 34 && px < q.x + q.w + 6 && q.x < px + w + 6; });
+      if (!hit) break;
+      py += (g % 2 ? -1 : 1) * (34 + g * 4);
+    }
+    py = Math.max(4, Math.min(H - 34, py));
+    placed.push({ x:px, y:py, w:w });
+    pins += '<g><line x1="' + cx.toFixed(1) + '" y1="' + cy.toFixed(1) + '" x2="' + (left ? px + w : px).toFixed(1) + '" y2="' + (py + 15).toFixed(1) +
+      '" stroke="#0B0F16" stroke-width="1" stroke-opacity=".3"/>' +
+      '<rect x="' + px.toFixed(1) + '" y="' + py.toFixed(1) + '" width="' + w.toFixed(1) + '" height="30" rx="10" fill="#0B0F16"/>' +
+      '<circle cx="' + (px + 14).toFixed(1) + '" cy="' + (py + 15).toFixed(1) + '" r="3.5" fill="' + (v >= 85 ? "#4ADE80" : v >= 75 ? "#60A5FA" : "#F87171") + '"/>' +
+      '<text x="' + (px + 24).toFixed(1) + '" y="' + (py + 19.5).toFixed(1) + '" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#FFFFFF">' + p[0] +
+      '<tspan font-weight="600" dx="8">' + v.toFixed(1) + "%</tspan></text></g>";
+  });
+
+  var svg = '<svg viewBox="0 0 ' + W + " " + H + '" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" role="img" ' +
+    'aria-label="Availability across India. Jaipur is highest at ' + order[0][1].toFixed(1) + ' percent, Kolkata lowest at ' +
+    order[order.length - 1][1].toFixed(1) + ' percent.">' +
+    '<path d="' + outline + '" fill="#F1F4F9" stroke="#E1E7F0" stroke-width="1" stroke-linejoin="round"/>' +
+    dots + pins + "</svg>";
+
+  var best = order[0], worst = order[order.length - 1];
+  var stats =
+    '<div class="mp-stats">' +
+      '<div class="mp-s"><span class="k">Best performing city</span><b class="v">' + best[1].toFixed(1) + '%</b><span class="c">' + best[0] + ' · in-stock on 5 Sept</span></div>' +
+      '<div class="mp-s"><span class="k">Weakest city</span><b class="v neg">' + worst[1].toFixed(1) + '%</b><span class="c">' + worst[0] + ' · ' + (best[1] - worst[1]).toFixed(1) + 'pp behind the leader</span></div>' +
+      '<div class="mp-s"><span class="k">Estate average</span><b class="v">88.0%</b><span class="c">Pan India, all 3,997 dark stores</span></div>' +
+      '<div class="mp-s"><span class="k">Cities tracked</span><b class="v">15</b><span class="c">Aug 30 – Sep 5</span></div>' +
+      '<div class="mp-lg"><span>' + LO + '%</span><span class="ramp"></span><span>' + HI + '%</span></div>' +
+    "</div>";
+
+  return '<div class="mp">' + stats + '<div class="mp-map">' + svg + "</div></div>" +
+    '<p class="hx-note">' + D.heat.missing + "</p>";
+}
 
 
 (function(){
