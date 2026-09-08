@@ -2,16 +2,16 @@
 <title>Four Directions for ShelfRadar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap">
 
 <style>
 /* ============ SHELL ============ */
 *,*::before,*::after{box-sizing:border-box}
-body{background:#101115;margin:0;font-family:"Inter",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+body{background:#101115;margin:0;font-family:"Inter",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;color:#E6E8EC}
 .shell{position:sticky;top:0;z-index:50;background:#101115;border-bottom:1px solid #26282F;padding:14px 20px 0}
 .shell-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px 18px;margin-bottom:12px}
 .shell-brand{font-size:13px;font-weight:600;color:#F2F3F5;letter-spacing:-.01em}
-.shell-note{font-size:11.5px;color:#7C808B;line-height:1.5}
+.shell-note{font-size:11.5px;color:#7C808B;line-height:1.5;max-width:82ch}
 .tabs{display:flex;flex-wrap:wrap;gap:2px}
 .tab{appearance:none;background:none;border:0;border-bottom:2px solid transparent;color:#8A8F9A;font:inherit;font-size:12.5px;font-weight:500;padding:8px 14px 10px;cursor:pointer;border-radius:6px 6px 0 0}
 .tab:hover{color:#D6D9DE;background:#191B21}
@@ -20,891 +20,486 @@ body{background:#101115;margin:0;font-family:"Inter",system-ui,-apple-system,san
 .caption{padding:11px 20px;background:#16181D;border-bottom:1px solid #26282F;color:#9EA3AD;font-size:12px;line-height:1.55}
 .caption b{color:#E6E8EC;font-weight:600}
 .stage{padding:22px;background:#101115}
-.frame{max-width:1240px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.frame{max-width:1280px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-/* ============ D1 · OBSIDIAN ============ */
-#d1{--bg:#0B0D0F;--panel:#13171B;--panel2:#171C21;--line:#232A31;--txt:#E9ECEF;--dim:#868F99;--faint:#5A626B;--amber:#E8A33D;--pos:#4DD4A0;--neg:#FF7A70;
-  background:var(--bg);color:var(--txt);font-family:"Instrument Sans",system-ui,sans-serif;display:grid;grid-template-columns:268px 1fr}
-#d1 .num{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
-#d1 .rail{background:var(--panel);border-right:1px solid var(--line);padding:20px 18px;display:flex;flex-direction:column;gap:18px}
-#d1 .rail-hd{display:flex;align-items:baseline;justify-content:space-between}
-#d1 .rail-hd h2{margin:0;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);font-weight:600}
-#d1 .rail-hd span{font-size:11px;color:var(--faint)}
-#d1 .plat{border-top:1px solid var(--line);padding-top:14px}
-#d1 .plat.is-on{border-top-color:var(--amber)}
-#d1 .plat-nm{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;letter-spacing:.02em;margin-bottom:12px}
-#d1 .plat.is-on .plat-nm{color:var(--amber)}
-#d1 .plat-nm .dot{width:6px;height:6px;border-radius:50%;background:var(--faint)}
-#d1 .plat.is-on .plat-nm .dot{background:var(--amber)}
-#d1 .plat-nm .tag{margin-left:auto;font-size:9.5px;letter-spacing:.1em;color:var(--faint);border:1px solid var(--line);padding:2px 5px;border-radius:3px}
-#d1 .mrow{display:flex;align-items:baseline;justify-content:space-between;padding:5px 0;font-size:12px}
-#d1 .mrow .k{color:var(--dim)}
-#d1 .mrow .v{display:flex;align-items:baseline;gap:8px}
-#d1 .mrow .v b{font-weight:500;font-size:13.5px}
-#d1 .mrow .v em{font-style:normal;font-size:11px;min-width:44px;text-align:right}
-#d1 .pos{color:var(--pos)}#d1 .neg{color:var(--neg)}#d1 .nil{color:var(--faint)}
-#d1 .loss{margin-top:11px;padding-top:11px;border-top:1px dashed var(--line);display:flex;align-items:baseline;justify-content:space-between}
-#d1 .loss span{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint)}
-#d1 .loss b{font-size:17px;font-weight:600;color:var(--neg)}
-#d1 .main{min-width:0;display:flex;flex-direction:column}
-#d1 .top{display:flex;align-items:center;gap:16px;padding:16px 24px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-#d1 .top h1{margin:0;font-size:19px;font-weight:600;letter-spacing:-.015em}
-#d1 .top .meta{font-size:11.5px;color:var(--faint)}
-#d1 .seg{margin-left:auto;display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
-#d1 .seg button{appearance:none;background:none;border:0;color:var(--dim);font:inherit;font-size:11.5px;padding:6px 12px;cursor:pointer}
-#d1 .seg button[aria-pressed="true"]{background:var(--panel2);color:var(--txt)}
-#d1 .hero{padding:24px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:32px;align-items:center}
-#d1 .hero-k{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin:0 0 10px}
-#d1 .hero-v{font-size:52px;font-weight:600;line-height:1;letter-spacing:-.03em;color:var(--amber)}
-#d1 .hero-v small{font-size:22px;font-weight:500}
-#d1 .hero-sub{margin:12px 0 0;font-size:13px;color:var(--dim);max-width:46ch;line-height:1.55}
-#d1 .hero-sub b{color:var(--txt);font-weight:500}
-#d1 .cmp{border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:var(--panel)}
-#d1 .cmp>p{margin:0 0 12px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
-#d1 .cmp .pg{margin-bottom:12px}
-#d1 .cmp .pg:last-child{margin-bottom:0}
-#d1 .cmp .pn{font-size:11.5px;color:var(--dim);margin-bottom:5px}
-#d1 .cmp .br{display:grid;grid-template-columns:52px 1fr 46px;align-items:center;gap:8px;padding:2px 0}
-#d1 .cmp .br span{font-size:10px;color:var(--faint)}
-#d1 .cmp .br .t{height:7px;border-radius:2px;background:#1D242A;overflow:hidden}
-#d1 .cmp .br .t i{display:block;height:100%}
-#d1 .cmp .br b{font-size:11.5px;font-weight:500;text-align:right}
-#d1 .tbl-hd{display:flex;align-items:center;gap:14px;padding:18px 24px 12px;flex-wrap:wrap}
-#d1 .tbl-hd h2{margin:0;font-size:13px;font-weight:600;letter-spacing:.02em}
-#d1 .tbl-hd .hint{font-size:11.5px;color:var(--faint)}
-#d1 .tbl-wrap{overflow-x:auto;padding:0 24px 26px}
-#d1 table{width:100%;border-collapse:collapse;min-width:820px}
-#d1 th{text-align:right;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);font-weight:600;padding:0 0 9px;border-bottom:1px solid var(--line)}
-#d1 th:first-child{text-align:left}
-#d1 td{padding:13px 0;border-bottom:1px solid var(--line);text-align:right;font-size:13px}
-#d1 td:first-child{text-align:left}
-#d1 tbody tr:hover td{background:#12161A}
-#d1 .sku{display:block;font-weight:500;font-size:13px}
-#d1 .sku-v{display:block;font-size:11px;color:var(--faint);margin-top:2px}
-#d1 .cell b{font-weight:500}
-#d1 .cell em{font-style:normal;display:block;font-size:10.5px;margin-top:2px}
-#d1 .risk{display:flex;align-items:center;justify-content:flex-end;gap:10px}
-#d1 .risk .bar{width:72px;height:4px;border-radius:2px;background:#232A31;overflow:hidden}
-#d1 .risk .bar i{display:block;height:100%;background:var(--amber)}
-#d1 .risk b{color:var(--amber);font-weight:500;min-width:52px}
-@media (max-width:880px){#d1{grid-template-columns:1fr}#d1 .rail{border-right:0;border-bottom:1px solid var(--line)}#d1 .hero{grid-template-columns:1fr}}
+/* ============================================================
+   SHARED STRUCTURE — identical for every direction.
+   Only the custom properties in each #dN theme block change.
+   ============================================================ */
+.dir{background:var(--bg);color:var(--tx);font-family:var(--font);font-size:var(--fs)}
+.dir b,.dir .num{font-variant-numeric:tabular-nums}
+.dir .pos{color:var(--pos)}
+.dir .neg{color:var(--neg)}
+.dir .nu{color:var(--tx3)}
 
-/* ============ D2 · UNTITLED UI ============ */
-#d2{--g25:#FCFCFD;--g50:#F9FAFB;--g100:#F2F4F7;--g200:#EAECF0;--g300:#D0D5DD;--g500:#667085;--g600:#475467;--g700:#344054;--g900:#101828;--p50:#F9F5FF;--p600:#7F56D9;--p700:#6941C6;--s50:#ECFDF3;--s700:#027A48;--e50:#FEF3F2;--e700:#B42318;
-  background:var(--g25);color:var(--g900);font-family:"Inter",system-ui,sans-serif;font-size:14px}
-#d2 .sh{padding:24px 32px 0;background:#fff;border-bottom:1px solid var(--g200)}
-#d2 .crumb{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--g600);margin-bottom:16px}
-#d2 .crumb .on{color:var(--p700)}
-#d2 .crumb .sep{color:var(--g300)}
-#d2 .ph{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-bottom:20px}
-#d2 .ph h1{margin:0 0 4px;font-size:30px;font-weight:600;letter-spacing:-.02em}
-#d2 .ph p{margin:0;color:var(--g600);font-size:16px}
-#d2 .ph .acts{margin-left:auto;display:flex;gap:12px}
-#d2 .btn{border:1px solid var(--g300);background:#fff;color:var(--g700);font:inherit;font-size:14px;font-weight:600;padding:10px 16px;border-radius:8px;box-shadow:0 1px 2px rgba(16,24,40,.05);cursor:pointer}
-#d2 .btn:hover{background:var(--g50)}
-#d2 .btn.pri{background:var(--p600);border-color:var(--p600);color:#fff}
-#d2 .btn.pri:hover{background:var(--p700)}
-#d2 .btn:focus-visible{outline:2px solid var(--p600);outline-offset:2px}
-#d2 .utabs{display:flex;gap:4px}
-#d2 .utabs button{appearance:none;background:none;border:0;border-bottom:2px solid transparent;color:var(--g500);font:inherit;font-size:14px;font-weight:600;padding:8px 4px;margin-right:12px;cursor:pointer}
-#d2 .utabs button[aria-selected="true"]{color:var(--p700);border-bottom-color:var(--p600)}
-#d2 .body{padding:24px 32px 32px;display:flex;flex-direction:column;gap:20px}
-#d2 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-#d2 .card{background:#fff;border:1px solid var(--g200);border-radius:12px;box-shadow:0 1px 2px rgba(16,24,40,.05);padding:20px}
-#d2 .card-hd{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-#d2 .card-hd .ic{width:28px;height:28px;border-radius:6px;display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff}
-#d2 .card-hd h3{margin:0;font-size:14px;font-weight:600;color:var(--g700)}
-#d2 .card-hd .badge{margin-left:auto}
-#d2 .badge{display:inline-flex;align-items:center;gap:5px;border-radius:16px;padding:2px 9px;font-size:12px;font-weight:500;line-height:18px}
-#d2 .badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
-#d2 .b-up{background:var(--s50);color:var(--s700)}
-#d2 .b-dn{background:var(--e50);color:var(--e700)}
-#d2 .b-nu{background:var(--g100);color:var(--g600)}
-#d2 .b-pl{background:var(--p50);color:var(--p700)}
-#d2 .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 12px}
-#d2 .kpi .k{font-size:12px;color:var(--g500);margin-bottom:3px}
-#d2 .kpi .v{font-size:24px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-#d2 .kpi .d{font-size:12px;font-weight:500;margin-top:2px}
-#d2 .up{color:var(--s700)}#d2 .dn{color:var(--e700)}#d2 .nu{color:var(--g500)}
-#d2 .card-ft{margin-top:16px;padding-top:16px;border-top:1px solid var(--g200);display:flex;align-items:center;justify-content:space-between}
-#d2 .card-ft span{font-size:13px;color:var(--g600);font-weight:500}
-#d2 .card-ft b{font-size:18px;font-weight:600;color:var(--e700);font-variant-numeric:tabular-nums}
-#d2 .panel{background:#fff;border:1px solid var(--g200);border-radius:12px;box-shadow:0 1px 2px rgba(16,24,40,.05);overflow:hidden}
-#d2 .panel-hd{padding:20px 24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;border-bottom:1px solid var(--g200)}
-#d2 .panel-hd h2{margin:0;font-size:18px;font-weight:600}
-#d2 .panel-hd .sub{width:100%;font-size:14px;color:var(--g600);margin:-6px 0 0}
-#d2 .panel-hd .right{margin-left:auto;display:flex;gap:10px;align-items:center}
-#d2 .sel{border:1px solid var(--g300);border-radius:8px;background:#fff;padding:9px 12px;font:inherit;font-size:14px;color:var(--g700);box-shadow:0 1px 2px rgba(16,24,40,.05)}
-#d2 .filters{display:flex;flex-wrap:wrap;gap:10px;padding:16px 24px;border-bottom:1px solid var(--g200);background:var(--g25)}
-#d2 .tw{overflow-x:auto}
-#d2 table{width:100%;border-collapse:collapse;min-width:900px}
-#d2 thead th{background:var(--g50);border-bottom:1px solid var(--g200);text-align:right;font-size:12px;font-weight:500;color:var(--g600);padding:12px 24px;white-space:nowrap}
-#d2 thead th:first-child{text-align:left}
-#d2 tbody td{border-bottom:1px solid var(--g200);padding:16px 24px;text-align:right;font-size:14px;color:var(--g600);font-variant-numeric:tabular-nums}
-#d2 tbody td:first-child{text-align:left}
-#d2 tbody tr:last-child td{border-bottom:0}
-#d2 tbody tr:hover td{background:var(--g25)}
-#d2 .nm{font-weight:500;color:var(--g900);display:block}
-#d2 .nm+span{font-size:14px;color:var(--g500)}
-#d2 .v{font-weight:500;color:var(--g900)}
-#d2 .stack{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
-#d2 .prog{display:flex;align-items:center;gap:12px;justify-content:flex-end}
-#d2 .prog .track{width:80px;height:8px;border-radius:4px;background:var(--g100)}
-#d2 .prog .track i{display:block;height:100%;border-radius:4px;background:var(--p600)}
-#d2 .pg{display:flex;align-items:center;padding:12px 24px;border-top:1px solid var(--g200)}
-#d2 .pg span{font-size:14px;color:var(--g700);font-weight:500}
-#d2 .pg .g{margin-left:auto;display:flex;gap:12px}
-@media (max-width:980px){#d2 .cards{grid-template-columns:1fr}}
+/* header */
+.dir .hdr{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:var(--padY) var(--padX);background:var(--surf);border-bottom:1px solid var(--line)}
+.dir .hdr h1{margin:0 6px 0 0;font-size:var(--h1);font-weight:600;letter-spacing:-.02em;color:var(--tx)}
+.dir .hdr .meta{font-size:12px;color:var(--tx3);border-bottom:1px dotted var(--line3);padding-bottom:1px}
+.dir .hdr .dot{color:var(--line3);font-size:12px}
+.dir .hdr-rt{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dir .pills{display:flex;gap:5px}
+.dir .pill{width:26px;height:26px;border-radius:var(--rPill);display:grid;place-items:center;font-size:11px;font-weight:700;background:var(--pc);color:var(--pi);opacity:.32}
+.dir .pill.on{opacity:1}
+.dir .seg{display:flex;border:1px solid var(--line);border-radius:var(--rCtl);overflow:hidden;background:var(--surf)}
+.dir .seg button{appearance:none;background:none;border:0;color:var(--tx2);font:inherit;font-size:12.5px;padding:6px 12px;cursor:pointer}
+.dir .seg button+button{border-left:1px solid var(--line)}
+.dir .seg button[aria-pressed="true"]{background:var(--acSeg);color:var(--acSegTx);font-weight:600}
+.dir .brand{appearance:none;border:1px solid var(--line);background:var(--surf);color:var(--tx);font:inherit;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:var(--rCtl);cursor:pointer}
+.dir button:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
 
-/* ============ D3 · SLATE ============ */
-#d3{--cv:#F6F7F9;--sf:#FFFFFF;--ln:#E4E7EB;--ln2:#EFF1F4;--tx:#101418;--tx2:#5A6472;--tx3:#8B94A1;--ac:#1F6F5C;--ac2:#E8F1EE;--pos:#1B7A5A;--neg:#C0392B;--nav:#101418;
-  background:var(--cv);color:var(--tx);font-family:"Instrument Sans",system-ui,sans-serif;font-size:14px;display:grid;grid-template-columns:212px 1fr}
-#d3 .n{font-variant-numeric:tabular-nums}
-#d3 .side{background:var(--sf);border-right:1px solid var(--ln);padding:20px 12px;display:flex;flex-direction:column;gap:22px}
-#d3 .logo{display:flex;align-items:center;gap:9px;padding:0 10px;font-size:15px;font-weight:600;letter-spacing:-.01em}
-#d3 .logo i{width:22px;height:22px;border-radius:6px;background:var(--ac);display:block}
-#d3 .nav{display:flex;flex-direction:column;gap:1px}
-#d3 .nav a{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;color:var(--tx2);text-decoration:none;font-size:13.5px;font-weight:500}
-#d3 .nav a:hover{background:var(--cv);color:var(--tx)}
-#d3 .nav a.on{background:var(--ac2);color:var(--ac);font-weight:600}
-#d3 .nav a i{width:15px;height:15px;border-radius:4px;border:1.5px solid currentColor;opacity:.55;flex:none}
-#d3 .nav a.on i{opacity:1}
-#d3 .side-ft{margin-top:auto;padding:12px 10px 0;border-top:1px solid var(--ln2);font-size:12px;color:var(--tx3);line-height:1.5}
-#d3 .main{min-width:0}
-#d3 .bar{background:var(--sf);border-bottom:1px solid var(--ln);padding:16px 26px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
-#d3 .bar h1{margin:0;font-size:20px;font-weight:600;letter-spacing:-.015em}
-#d3 .bar .sub{font-size:12.5px;color:var(--tx3)}
-#d3 .bar .rt{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-#d3 .ctl{border:1px solid var(--ln);background:var(--sf);border-radius:7px;padding:7px 11px;font:inherit;font-size:13px;color:var(--tx2);cursor:pointer}
-#d3 .ctl:hover{border-color:#CFD5DC;color:var(--tx)}
-#d3 .ctl:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
-#d3 .sw{display:flex;border:1px solid var(--ln);border-radius:7px;overflow:hidden;background:var(--sf)}
-#d3 .sw button{appearance:none;border:0;background:none;font:inherit;font-size:13px;color:var(--tx2);padding:7px 12px;cursor:pointer}
-#d3 .sw button[aria-pressed="true"]{background:var(--tx);color:#fff}
-#d3 .content{padding:22px 26px 30px;display:flex;flex-direction:column;gap:18px}
-#d3 .tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-#d3 .tile{background:var(--sf);border:1px solid var(--ln);border-radius:10px;padding:16px 18px}
-#d3 .tile .k{font-size:12.5px;color:var(--tx3);display:flex;align-items:center;gap:6px;margin-bottom:10px}
-#d3 .tile .k b{font-weight:500;color:var(--tx2)}
-#d3 .tile .v{font-size:28px;font-weight:600;letter-spacing:-.025em;line-height:1.1}
-#d3 .tile .f{margin-top:8px;display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--tx3)}
-#d3 .chip{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:500;padding:2px 7px;border-radius:5px}
-#d3 .c-up{background:#E9F5F0;color:var(--pos)}
-#d3 .c-dn{background:#FBECEA;color:var(--neg)}
-#d3 .c-nu{background:#F1F3F6;color:var(--tx3)}
-#d3 .tile.risk{border-color:#E7CFCB;background:#FDF7F6}
-#d3 .tile.risk .v{color:var(--neg)}
-#d3 .row2{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:14px}
-#d3 .card{background:var(--sf);border:1px solid var(--ln);border-radius:10px;overflow:hidden;min-width:0}
-#d3 .card-hd{padding:14px 18px;border-bottom:1px solid var(--ln2);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-#d3 .card-hd h2{margin:0;font-size:14px;font-weight:600}
-#d3 .card-hd .s{font-size:12.5px;color:var(--tx3)}
-#d3 .card-hd .rt{margin-left:auto;display:flex;gap:8px;align-items:center}
-#d3 .lg{display:flex;gap:14px;font-size:12px;color:var(--tx2)}
-#d3 .lg span{display:flex;align-items:center;gap:6px}
-#d3 .lg i{width:9px;height:2.5px;border-radius:2px;display:block}
-#d3 .card-bd{padding:16px 18px}
-#d3 .cmp .cg{margin-bottom:16px}
-#d3 .cmp .cg:last-of-type{margin-bottom:10px}
-#d3 .cmp .cn{font-size:13px;font-weight:600;margin-bottom:6px}
-#d3 .cmp .cb{display:grid;grid-template-columns:58px 1fr 52px;align-items:center;gap:10px;padding:3px 0}
-#d3 .cmp .cb span:first-child{font-size:12px;color:var(--tx3)}
-#d3 .cmp .cb .t{height:10px;border-radius:3px;background:#EEF0F3;overflow:hidden}
-#d3 .cmp .cb .t i{display:block;height:100%;border-radius:3px}
-#d3 .cmp .cb b{font-size:13px;font-weight:600;text-align:right;color:var(--tx)}
-#d3 .cmp .cax{display:grid;grid-template-columns:58px 1fr 52px;gap:10px;font-size:11px;color:var(--tx3);border-top:1px solid var(--ln2);padding-top:6px}
-#d3 .cmp .cax span:nth-child(2){text-align:center}
-#d3 .cmp .cax span:last-child{text-align:right}
-#d3 .plats{display:flex;flex-direction:column}
-#d3 .prow{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--ln2)}
-#d3 .prow:last-child{border-bottom:0;padding-bottom:0}
-#d3 .prow .nm{font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:8px}
-#d3 .prow .nm i{width:8px;height:8px;border-radius:2px;display:block}
-#d3 .prow .rk{font-size:13.5px;font-weight:600;color:var(--neg);text-align:right}
-#d3 .prow .mt{grid-column:1/-1;display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--tx3)}
-#d3 .prow .mt b{color:var(--tx);font-weight:500}
-#d3 .tw{overflow-x:auto}
-#d3 table{width:100%;border-collapse:collapse;min-width:880px}
-#d3 thead th{text-align:right;font-size:12px;font-weight:500;color:var(--tx3);padding:11px 18px;background:#FAFBFC;border-bottom:1px solid var(--ln);white-space:nowrap}
-#d3 thead th:first-child{text-align:left}
-#d3 tbody td{text-align:right;padding:14px 18px;border-bottom:1px solid var(--ln2);font-size:13.5px;color:var(--tx2)}
-#d3 tbody td:first-child{text-align:left}
-#d3 tbody tr:last-child td{border-bottom:0}
-#d3 tbody tr:hover td{background:#FAFBFC}
-#d3 .sku{display:block;font-weight:600;color:var(--tx);font-size:13.5px}
-#d3 .sku+span{font-size:12.5px;color:var(--tx3)}
-#d3 .val{color:var(--tx);font-weight:500}
-#d3 .st{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
-#d3 .rkc{display:flex;align-items:center;justify-content:flex-end;gap:10px}
-#d3 .rkc .tr{width:64px;height:5px;border-radius:3px;background:#EEF0F3;overflow:hidden}
-#d3 .rkc .tr i{display:block;height:100%;background:var(--neg);opacity:.75}
-#d3 .rkc b{color:var(--neg);font-weight:600;min-width:50px}
-@media (max-width:1040px){#d3 .tiles{grid-template-columns:repeat(2,1fr)}#d3 .row2{grid-template-columns:1fr}}
-@media (max-width:820px){#d3{grid-template-columns:1fr}#d3 .side{border-right:0;border-bottom:1px solid var(--ln)}#d3 .nav{flex-direction:row;flex-wrap:wrap}}
+/* brand cards */
+.dir .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);padding:var(--gap) var(--padX);background:var(--bg)}
+.dir .pcard{background:var(--surf);border:1px solid var(--line);border-radius:var(--rCard);box-shadow:var(--shadow);padding:var(--cardPad);display:flex;flex-direction:column}
+.dir .pcard.is-on{border-color:var(--acCard)}
+.dir .pc-hd{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.dir .pc-hd .ic{width:28px;height:28px;border-radius:var(--rPill);display:grid;place-items:center;font-size:11.5px;font-weight:700}
+.dir .pc-hd h2{margin:0;font-size:14px;font-weight:600;letter-spacing:.01em;color:var(--tx)}
+.dir .pc-hd .tag{margin-left:auto;font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ac);background:var(--acSoft);border-radius:var(--rTag);padding:3px 8px}
+.dir .pc-hd .tag.warn{color:var(--tx3);background:var(--surf2)}
+.dir .pc-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.dir .pc-m{display:flex;flex-direction:column;gap:2px;padding-left:12px;border-left:1px solid var(--line2)}
+.dir .pc-m:first-child{padding-left:0;border-left:0}
+.dir .pc-m .k{font-size:11.5px;color:var(--tx3);white-space:nowrap}
+.dir .pc-m .v{font-size:var(--kpi);font-weight:600;letter-spacing:-.02em;line-height:1.15;color:var(--tx)}
+.dir .pc-m .d{font-size:11.5px;font-weight:500}
+.dir .pc-ft{margin-top:auto;padding-top:14px;display:flex;align-items:baseline;justify-content:space-between;border-top:1px solid var(--line2)}
+.dir .pc-ft span{font-size:12px;color:var(--tx3);letter-spacing:.02em}
+.dir .pc-ft b{font-size:19px;font-weight:600;color:var(--neg)}
+.dir .pc-ft b.nu{color:var(--tx3);font-size:16px}
 
-/* ============ D4 · GRAPHITE ============ */
-#d4{--bg:#FFFFFF;--bg2:#FAFBFB;--ln:#E1E4E6;--ln2:#EDEFF1;--tx:#131820;--tx2:#4E5866;--tx3:#828E9C;--ac:#0F62FE;--pos:#0E7C4A;--neg:#C21E2B;
-  background:var(--bg);color:var(--tx);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:13.5px}
-#d4 .n{font-variant-numeric:tabular-nums}
-#d4 .top{border-bottom:1px solid var(--ln);display:flex;align-items:stretch;height:46px;padding:0 20px;gap:0}
-#d4 .top .bm{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:-.01em;padding-right:22px}
-#d4 .top .bm i{width:16px;height:16px;background:var(--ac);display:block}
-#d4 .top nav{display:flex}
-#d4 .top nav a{display:flex;align-items:center;padding:0 14px;font-size:13px;color:var(--tx2);text-decoration:none;border-bottom:2px solid transparent}
-#d4 .top nav a:hover{color:var(--tx);background:var(--bg2)}
-#d4 .top nav a.on{color:var(--tx);font-weight:600;border-bottom-color:var(--ac)}
-#d4 .top .rt{margin-left:auto;display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--tx3)}
-#d4 .tool{border-bottom:1px solid var(--ln);background:var(--bg2);padding:10px 20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-#d4 .tool h1{margin:0 14px 0 0;font-size:16px;font-weight:600;letter-spacing:-.01em}
-#d4 .f{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--ln);background:var(--bg);padding:5px 10px;font-size:12.5px;color:var(--tx2);cursor:pointer}
-#d4 .f b{color:var(--tx);font-weight:500}
-#d4 .f:hover{border-color:#C9CFD4}
-#d4 .f:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
-#d4 .seg{display:inline-flex;border:1px solid var(--ln);background:var(--bg)}
-#d4 .seg button{appearance:none;border:0;border-right:1px solid var(--ln);background:none;font:inherit;font-size:12.5px;color:var(--tx2);padding:5px 11px;cursor:pointer}
-#d4 .seg button:last-child{border-right:0}
-#d4 .seg button[aria-pressed="true"]{background:var(--ac);color:#fff}
-#d4 .tool .rt{margin-left:auto;display:flex;gap:8px;font-size:12.5px;color:var(--tx3);align-items:center}
-#d4 .strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-bottom:1px solid var(--ln)}
-#d4 .kp{padding:14px 20px;border-right:1px solid var(--ln2)}
-#d4 .kp:last-child{border-right:0}
-#d4 .kp .k{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--tx3);margin-bottom:7px}
-#d4 .kp .v{font-size:25px;font-weight:600;letter-spacing:-.02em;line-height:1.1}
-#d4 .kp .d{font-size:12px;margin-top:4px;color:var(--tx3)}
-#d4 .pos{color:var(--pos)}#d4 .neg{color:var(--neg)}#d4 .nil{color:var(--tx3)}
-#d4 .kp.acc{background:#FFF7F7}
-#d4 .kp.acc .v{color:var(--neg)}
-#d4 .split{display:grid;grid-template-columns:minmax(0,1fr) 316px}
-#d4 .pane{min-width:0;border-right:1px solid var(--ln)}
-#d4 .pane:last-child{border-right:0}
-#d4 .ph{display:flex;align-items:center;gap:12px;padding:10px 20px;border-bottom:1px solid var(--ln2);flex-wrap:wrap}
-#d4 .ph h2{margin:0;font-size:12.5px;font-weight:600;letter-spacing:.02em}
-#d4 .ph .s{font-size:12px;color:var(--tx3)}
-#d4 .ph .rt{margin-left:auto;font-size:12px;color:var(--ac);cursor:pointer}
-#d4 .tw{overflow-x:auto}
-#d4 table{width:100%;border-collapse:collapse;min-width:860px}
-#d4 thead th{text-align:right;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--tx3);font-weight:500;padding:8px 20px;border-bottom:1px solid var(--ln);white-space:nowrap}
-#d4 thead th:first-child{text-align:left}
-#d4 tbody td{text-align:right;padding:11px 20px;border-bottom:1px solid var(--ln2);color:var(--tx2)}
-#d4 tbody td:first-child{text-align:left;color:var(--tx)}
-#d4 tbody tr:hover td{background:var(--bg2)}
-#d4 .sku{font-weight:500}
-#d4 .sku span{color:var(--tx3);font-weight:400}
-#d4 .val{color:var(--tx);font-weight:500}
-#d4 .dl{font-size:11.5px;margin-left:7px}
-#d4 .rkc{display:flex;align-items:center;justify-content:flex-end;gap:9px}
-#d4 .rkc .tr{width:56px;height:4px;background:#EDEFF1}
-#d4 .rkc .tr i{display:block;height:100%;background:var(--neg)}
-#d4 .rkc b{color:var(--neg);font-weight:600;min-width:48px}
-#d4 .heat{padding:12px 20px 16px;overflow-x:auto}
-#d4 .hg{display:grid;grid-template-columns:78px repeat(7,1fr);gap:2px;min-width:420px}
-#d4 .hg .lb{font-size:11.5px;color:var(--tx2);line-height:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#d4 .hg .lb.hd{font-weight:600;color:var(--tx)}
-#d4 .hg .dt{font-size:10.5px;color:var(--tx3);text-align:center;padding-bottom:2px}
-#d4 .hg .c{height:16px}
-#d4 .hlg{display:flex;align-items:center;gap:7px;margin-top:10px;font-size:11.5px;color:var(--tx3)}
-#d4 .hlg .rp{width:92px;height:7px;background:linear-gradient(90deg,#E8EEFB,#0F62FE)}
-#d4 .side{padding:0}
-#d4 .lgrp{padding:12px 20px;border-bottom:1px solid var(--ln2)}
-#d4 .lrow{display:grid;grid-template-columns:1fr auto;gap:5px 10px;padding:7px 0}
-#d4 .lrow .nm{font-size:12.5px;color:var(--tx2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#d4 .lrow .vv{font-size:12.5px;font-weight:600;color:var(--neg)}
-#d4 .lrow .tr{grid-column:1/-1;height:4px;background:#EDEFF1}
-#d4 .lrow .tr i{display:block;height:100%;background:var(--neg);opacity:.8}
-#d4 .defs{padding:12px 20px}
-#d4 .dfr{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid var(--ln2);font-size:12px}
-#d4 .dfr:last-child{border-bottom:0}
-#d4 .dfr .k{color:var(--tx);font-weight:500}
-#d4 .dfr .x{color:var(--tx3);text-align:right}
-@media (max-width:1040px){#d4 .strip{grid-template-columns:repeat(2,1fr)}#d4 .kp{border-bottom:1px solid var(--ln2)}#d4 .split{grid-template-columns:1fr}#d4 .pane{border-right:0;border-bottom:1px solid var(--ln)}}
+/* view tabs */
+.dir .vtabs{display:flex;gap:2px;padding:0 var(--padX);border-bottom:1px solid var(--line);background:var(--surf)}
+.dir .vtabs button{appearance:none;background:none;border:0;border-bottom:2px solid transparent;color:var(--tx3);font:inherit;font-size:13px;font-weight:600;padding:12px 14px;cursor:pointer;margin-bottom:-1px}
+.dir .vtabs button:hover{color:var(--tx)}
+.dir .vtabs button.on{color:var(--ac);border-bottom-color:var(--ac)}
 
+/* filter bar */
+.dir .body{padding:0 0 var(--gap)}
+.dir .fbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:14px var(--padX);border-bottom:1px solid var(--line2);background:var(--surf2)}
+.dir .fl{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3);margin-right:2px}
+.dir .fb{appearance:none;border:1px solid var(--line);background:var(--surf);color:var(--tx2);font:inherit;font-size:12.5px;padding:7px 12px;border-radius:var(--rCtl);cursor:pointer}
+.dir .fb:hover{color:var(--tx);border-color:var(--line3)}
+.dir .fb.on{color:var(--ac);border-color:var(--ac);background:var(--acSoft);font-weight:600}
+
+/* sections */
+.dir .sec{margin:var(--gap) var(--padX) 0;background:var(--surf);border:1px solid var(--line);border-radius:var(--rCard);box-shadow:var(--shadow);overflow:hidden}
+.dir .sec-hd{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 18px;border-bottom:1px solid var(--line2)}
+.dir .sec-hd h2{margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--tx)}
+.dir .sec-hd .s{font-size:12.5px;color:var(--tx3)}
+.dir .sec-hd .rt{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+/* tables */
+.dir .tw{overflow-x:auto}
+.dir table{width:100%;border-collapse:collapse;min-width:900px}
+.dir thead th{text-align:right;font-size:11.5px;font-weight:500;letter-spacing:.03em;color:var(--tx3);padding:10px 18px;background:var(--surf2);border-bottom:1px solid var(--line);white-space:nowrap}
+.dir thead th:first-child{text-align:left}
+.dir tbody td{text-align:right;padding:var(--rowPad) 18px;border-bottom:1px solid var(--line2);color:var(--tx2);vertical-align:middle}
+.dir tbody td:first-child{text-align:left}
+.dir tbody tr:last-child td{border-bottom:0}
+.dir tbody tr:hover td{background:var(--hover)}
+.dir tbody tr.grp td,.dir tbody tr.you td{background:var(--acSoft)}
+.dir .c-nm{min-width:250px}
+.dir .nm{display:block;font-weight:600;font-size:13.5px;color:var(--tx)}
+.dir .nm .sub{font-weight:400;color:var(--tx2)}
+.dir .vr{display:block;font-size:12px;color:var(--tx3);margin-top:2px}
+.dir tbody td b{font-weight:600;font-size:13.5px;color:var(--tx);display:block}
+.dir tbody td .d{display:block;font-size:11.5px;font-weight:500;margin-top:2px}
+.dir .cdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:middle}
+.dir .ybadge{font-style:normal;font-size:10px;letter-spacing:.08em;color:var(--ac);border:1px solid var(--ac);border-radius:3px;padding:1px 5px;margin-left:6px;font-weight:600}
+.dir .rk{display:flex;align-items:center;justify-content:flex-end;gap:12px}
+.dir .rk .tr{width:76px;height:6px;border-radius:3px;background:var(--track);overflow:hidden;flex:none}
+.dir .rk .tr i{display:block;height:100%;background:var(--neg);border-radius:3px}
+.dir .rk b{color:var(--neg);min-width:58px;text-align:right}
+
+/* heat */
+.dir .hx{padding:18px}
+.dir .hx-g{display:grid;gap:3px;min-width:620px}
+.dir .hx-dt{font-size:11px;color:var(--tx3);text-align:center;padding-bottom:2px}
+.dir .hx-lb{font-size:12.5px;color:var(--tx2);line-height:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dir .hx-lb.is-total{color:var(--tx);font-weight:600}
+.dir .hx-c{height:18px;border-radius:var(--rCell);background:var(--surf2);border:1px dashed var(--line)}
+.dir .hx-note{margin:14px 0 0;font-size:12.5px;color:var(--tx3);line-height:1.55;max-width:88ch}
+
+/* chart + definitions */
+.dir .chart{padding:16px 18px 20px}
+.dir .defs{padding:6px 18px 16px}
+.dir .df{display:grid;grid-template-columns:150px 1fr;gap:5px 18px;padding:14px 0;border-bottom:1px solid var(--line2)}
+.dir .df:last-child{border-bottom:0}
+.dir .df b{font-weight:600;color:var(--tx);font-size:13.5px}
+.dir .df code{font-family:var(--mono);font-size:12.5px;color:var(--ac);background:var(--acSoft);padding:3px 9px;border-radius:var(--rTag);justify-self:start}
+.dir .df span{grid-column:2;color:var(--tx2);font-size:13px;line-height:1.55}
+
+@media (max-width:1080px){.dir .cards{grid-template-columns:1fr}.dir .pc-grid{grid-template-columns:repeat(4,1fr)}}
+
+/* ============================================================
+   THEMES
+   ============================================================ */
+
+/* 1 · OBSIDIAN — dark instrumentation, amber = money at risk */
+#d1{--bg:#0B0D0F;--surf:#13171B;--surf2:#101418;--line:#232A31;--line2:#1B2127;--line3:#39434D;
+  --tx:#E9ECEF;--tx2:#A8B1BA;--tx3:#7A838D;--ac:#E8A33D;--acSoft:#1E1A12;--acCard:#E8A33D;
+  --acSeg:#232A31;--acSegTx:#E9ECEF;--pos:#4DD4A0;--neg:#FF7A70;--track:#232A31;--hover:#161B20;
+  --font:"Instrument Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;--fs:14px;--h1:20px;--kpi:24px;
+  --rCard:10px;--rCtl:6px;--rPill:6px;--rTag:4px;--rCell:2px;--shadow:none;--padX:22px;--padY:16px;--gap:18px;--cardPad:18px;--rowPad:14px}
+#d1 .pc-m .v,#d1 tbody td b,#d1 .rk b{font-family:var(--mono);letter-spacing:-.01em}
+#d1 .pc-ft b{font-family:var(--mono)}
+
+/* 2 · UNTITLED UI — the library's own tokens */
+#d2{--bg:#FCFCFD;--surf:#FFFFFF;--surf2:#F9FAFB;--line:#EAECF0;--line2:#F2F4F7;--line3:#D0D5DD;
+  --tx:#101828;--tx2:#475467;--tx3:#667085;--ac:#6941C6;--acSoft:#F9F5FF;--acCard:#D6BBFB;
+  --acSeg:#7F56D9;--acSegTx:#FFFFFF;--pos:#027A48;--neg:#B42318;--track:#F2F4F7;--hover:#FCFCFD;
+  --font:"Inter",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;--fs:14px;--h1:24px;--kpi:24px;
+  --rCard:12px;--rCtl:8px;--rPill:8px;--rTag:16px;--rCell:4px;--shadow:0 1px 2px rgba(16,24,40,.05);--padX:24px;--padY:20px;--gap:20px;--cardPad:20px;--rowPad:16px}
+#d2 .rk .tr i{background:#7F56D9}
+#d2 .rk b{color:var(--tx)}
+#d2 .pc-hd .tag{font-size:12px;font-weight:500;text-transform:none;letter-spacing:0}
+
+/* 3 · SLATE — quiet minimal, no shadows, teal brand */
+#d3{--bg:#F6F7F9;--surf:#FFFFFF;--surf2:#FAFBFC;--line:#E4E7EB;--line2:#EFF1F4;--line3:#CFD5DC;
+  --tx:#101418;--tx2:#5A6472;--tx3:#8B94A1;--ac:#1F6F5C;--acSoft:#ECF4F1;--acCard:#1F6F5C;
+  --acSeg:#101418;--acSegTx:#FFFFFF;--pos:#1B7A5A;--neg:#C0392B;--track:#EEF0F3;--hover:#FAFBFC;
+  --font:"Instrument Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;--fs:14px;--h1:22px;--kpi:26px;
+  --rCard:10px;--rCtl:7px;--rPill:7px;--rTag:5px;--rCell:3px;--shadow:none;--padX:26px;--padY:18px;--gap:16px;--cardPad:18px;--rowPad:15px}
+#d3 .pcard.is-on{border-color:var(--line);box-shadow:inset 3px 0 0 var(--ac)}
+#d3 .sec-hd h2{letter-spacing:-.015em}
+
+/* 4 · GRAPHITE — compact, rules not cards, IBM blue */
+#d4{--bg:#FFFFFF;--surf:#FFFFFF;--surf2:#FAFBFB;--line:#E1E4E6;--line2:#EDEFF1;--line3:#C9CFD4;
+  --tx:#131820;--tx2:#4E5866;--tx3:#828E9C;--ac:#0F62FE;--acSoft:#F1F5FF;--acCard:#0F62FE;
+  --acSeg:#0F62FE;--acSegTx:#FFFFFF;--pos:#0E7C4A;--neg:#C21E2B;--track:#EDEFF1;--hover:#FAFBFB;
+  --font:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;--fs:13.5px;--h1:19px;--kpi:23px;
+  --rCard:0px;--rCtl:0px;--rPill:0px;--rTag:0px;--rCell:0px;--shadow:none;--padX:20px;--padY:12px;--gap:0px;--cardPad:16px;--rowPad:11px}
+#d4 .cards{padding:0;gap:0;border-bottom:1px solid var(--line)}
+#d4 .pcard{border:0;border-right:1px solid var(--line)}
+#d4 .pcard:last-child{border-right:0}
+#d4 .pcard.is-on{box-shadow:inset 0 2px 0 var(--ac)}
+#d4 .sec{margin:0;border:0;border-top:1px solid var(--line);border-radius:0}
+#d4 .body{padding:0}
+#d4 .pc-m .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+#d4 .sec-hd h2{font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+#d4 .hx{padding:14px 20px 18px}
 
 </style>
 
 <div class="shell">
   <div class="shell-top">
     <div class="shell-brand">ShelfRadar · Availability — four redesign directions</div>
-    <div class="shell-note">Every figure is taken verbatim from the live product (Jupiter, 7&nbsp;days to 5&nbsp;Sept 26, 3,997 dark stores). Values that were clipped or absent in capture are shown as&nbsp;— rather than filled in.</div>
+    <div class="shell-note">Every option renders the identical dataset, transcribed from the captured screenshots (Jupiter, 7&nbsp;days to 5&nbsp;Sept 26, 3,997 dark stores, selling price). Values that were clipped or not legible in capture are shown as an explicit gap, never filled in.</div>
   </div>
-  <div class="tabs" role="tablist" aria-label="Design directions">
-    <button class="tab" role="tab" aria-selected="true" aria-controls="d1" id="t1">Obsidian</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="d2" id="t2">Untitled UI</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="d3" id="t3">Slate</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="d4" id="t4">Graphite</button>
-  </div>
+  <div class="tabs" role="tablist" aria-label="Design directions"><button class="tab" role="tab" aria-selected="true" aria-controls="d1" id="t1">Obsidian</button><button class="tab" role="tab" aria-selected="false" aria-controls="d2" id="t2">Untitled UI</button><button class="tab" role="tab" aria-selected="false" aria-controls="d3" id="t3">Slate</button><button class="tab" role="tab" aria-selected="false" aria-controls="d4" id="t4">Graphite</button></div>
 </div>
 
 <div class="caption" id="cap"></div>
 
 <div class="stage">
   <div class="frame">
-
-  <!-- ================= D1 · OBSIDIAN ================= -->
-  <section id="d1" role="tabpanel" aria-labelledby="t1">
-    <aside class="rail">
-      <div class="rail-hd"><h2>Platforms</h2><span>3 live</span></div>
-
-      <div class="plat is-on">
-        <div class="plat-nm"><i class="dot"></i>Blinkit<span class="tag">VIEWING</span></div>
-        <div class="mrow"><span class="k">Assortment</span><span class="v"><b class="num">15</b><em class="nil">—</em></span></div>
-        <div class="mrow"><span class="k">DS listing</span><span class="v"><b class="num">51.4%</b><em class="num neg">−0.2</em></span></div>
-        <div class="mrow"><span class="k">In stock (DSA)</span><span class="v"><b class="num">88.0%</b><em class="num neg">−0.2</em></span></div>
-        <div class="mrow"><span class="k">Sales-weighted</span><span class="v"><b class="num">85.0%</b><em class="num neg">−0.7</em></span></div>
-        <div class="loss"><span>Sales at risk</span><b class="num">₹2.4L</b></div>
-      </div>
-
-      <div class="plat">
-        <div class="plat-nm"><i class="dot"></i>Zepto</div>
-        <div class="mrow"><span class="k">Assortment</span><span class="v"><b class="num">31</b><em class="nil">—</em></span></div>
-        <div class="mrow"><span class="k">DS listing</span><span class="v"><b class="num">81.0%</b><em class="num pos">+15.3</em></span></div>
-        <div class="mrow"><span class="k">In stock (DSA)</span><span class="v"><b class="num">99.5%</b><em class="num pos">+0.4</em></span></div>
-        <div class="mrow"><span class="k">Sales-weighted</span><span class="v"><b class="num">98.7%</b><em class="num pos">+0.2</em></span></div>
-        <div class="loss"><span>Sales at risk</span><b class="num">₹21K</b></div>
-      </div>
-
-      <div class="plat">
-        <div class="plat-nm"><i class="dot"></i>Instamart</div>
-        <div class="mrow"><span class="k">Assortment</span><span class="v"><b class="num">28</b><em class="nil">—</em></span></div>
-        <div class="mrow"><span class="k">DS listing</span><span class="v"><b class="num">69.4%</b><em class="num pos">+42.1</em></span></div>
-        <div class="mrow"><span class="k">In stock (DSA)</span><span class="v"><b class="num nil">—</b><em class="nil"></em></span></div>
-        <div class="mrow"><span class="k">Sales-weighted</span><span class="v"><b class="num nil">—</b><em class="nil"></em></span></div>
-        <div class="loss"><span>Sales at risk</span><b class="num nil">—</b></div>
-      </div>
-    </aside>
-
-    <div class="main">
-      <div class="top">
-        <h1>Availability</h1>
-        <div class="meta">7 days to 5 Sept 26 · 3,997 dark stores · selling price</div>
-        <div class="seg">
-          <button type="button" aria-pressed="false">MTD</button>
-          <button type="button" aria-pressed="true">7D</button>
-          <button type="button" aria-pressed="false">30D</button>
-        </div>
-      </div>
-
-      <div class="hero">
-        <div>
-          <p class="hero-k">Blinkit · sales at risk this week</p>
-          <div class="hero-v num">₹2.4<small>L</small></div>
-          <p class="hero-sub">Listing is the constraint, not stock. In stock in <b>88.0%</b> of the stores that carry you, but listed in only <b>51.4%</b> of Blinkit's 3,997 dark stores. Zepto lists <b>81.0%</b>, across <b>31</b> SKUs to Blinkit's <b>15</b>.</p>
-        </div>
-        <div class="cmp">
-          <p>Listed vs in stock · by platform</p>
-          <div class="pg">
-            <div class="pn">Blinkit</div>
-            <div class="br"><span>Listed</span><span class="t"><i style="width:51.4%;background:#5A626B"></i></span><b class="num">51.4%</b></div>
-            <div class="br"><span>In stock</span><span class="t"><i style="width:88%;background:#E8A33D"></i></span><b class="num">88.0%</b></div>
-          </div>
-          <div class="pg">
-            <div class="pn">Zepto</div>
-            <div class="br"><span>Listed</span><span class="t"><i style="width:81%;background:#5A626B"></i></span><b class="num">81.0%</b></div>
-            <div class="br"><span>In stock</span><span class="t"><i style="width:99.5%;background:#E8A33D"></i></span><b class="num">99.5%</b></div>
-          </div>
-          <div class="pg">
-            <div class="pn">Instamart</div>
-            <div class="br"><span>Listed</span><span class="t"><i style="width:69.4%;background:#5A626B"></i></span><b class="num">69.4%</b></div>
-            <div class="br"><span>In stock</span><span class="t"></span><b class="num nil">—</b></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tbl-hd">
-        <h2>Where the risk sits</h2>
-        <span class="hint">4 SKUs · Pan India · ranked by revenue at risk</span>
-      </div>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr>
-            <th>SKU</th><th>Listed in</th><th>In stock</th><th>Sales</th><th>Wt. in stock</th><th>At risk</th>
-          </tr></thead>
-          <tbody>
-            <tr>
-              <td><span class="sku">No-Nonsense Plant Protein</span><span class="sku-v">1 kg</span></td>
-              <td class="cell num"><b>80.5%</b><em class="pos">+2.2</em></td>
-              <td class="cell num"><b>88.6%</b><em class="neg">−0.3</em></td>
-              <td class="cell num"><b>₹21.2L</b><em class="pos">+6.8</em></td>
-              <td class="cell num"><b>89.5%</b><em class="neg">−1.0</em></td>
-              <td><div class="risk"><span class="bar"><i style="width:100%"></i></span><b class="num">₹59.3K</b></div></td>
-            </tr>
-            <tr>
-              <td><span class="sku">No-Nonsense Plant Protein</span><span class="sku-v">Chikmagalur Mocha · 500 g</span></td>
-              <td class="cell num"><b>43.7%</b><em class="pos">+4.0</em></td>
-              <td class="cell num"><b>76.1%</b><em class="neg">−1.7</em></td>
-              <td class="cell num"><b>₹5.6L</b><em class="neg">−0.6</em></td>
-              <td class="cell num"><b>73.5%</b><em class="neg">−3.7</em></td>
-              <td><div class="risk"><span class="bar"><i style="width:71%"></i></span><b class="num">₹42.4K</b></div></td>
-            </tr>
-            <tr>
-              <td><span class="sku">No-Nonsense Plant Protein</span><span class="sku-v">Indonesian Cacao · 500 g</span></td>
-              <td class="cell num"><b>42.1%</b><em class="neg">−0.7</em></td>
-              <td class="cell num"><b>84.3%</b><em class="neg">−0.9</em></td>
-              <td class="cell num"><b>₹9.5L</b><em class="neg">−9.0</em></td>
-              <td class="cell num"><b>81.2%</b><em class="pos">+0.7</em></td>
-              <td><div class="risk"><span class="bar"><i style="width:54%"></i></span><b class="num">₹32.3K</b></div></td>
-            </tr>
-            <tr>
-              <td><span class="sku">No-Nonsense Plant Protein</span><span class="sku-v">Assorted · 5 × 38 g</span></td>
-              <td class="cell num"><b>46.2%</b><em class="pos">+5.0</em></td>
-              <td class="cell num"><b>79.2%</b><em class="neg">−1.1</em></td>
-              <td class="cell num"><b>₹4.6L</b><em class="pos">+1.2</em></td>
-              <td class="cell num"><b>78.7%</b><em class="pos">+0.5</em></td>
-              <td><div class="risk"><span class="bar"><i style="width:49%"></i></span><b class="num">₹28.8K</b></div></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= D2 · UNTITLED UI ================= -->
-  <section id="d2" role="tabpanel" aria-labelledby="t2" hidden>
-    <div class="sh">
-      <div class="crumb"><span>Dashboard</span><span class="sep">/</span><span class="on">Availability</span></div>
-      <div class="ph">
-        <div>
-          <h1>Availability</h1>
-          <p>Where Jupiter is listed and in stock across 3,997 dark stores.</p>
-        </div>
-        <div class="acts">
-          <button class="btn" type="button">Export CSV</button>
-          <button class="btn pri" type="button">Create alert</button>
-        </div>
-      </div>
-      <div class="utabs" role="tablist" aria-label="Availability views">
-        <button type="button" role="tab" aria-selected="true">Overview</button>
-        <button type="button" role="tab" aria-selected="false">Competition</button>
-        <button type="button" role="tab" aria-selected="false">By city</button>
-      </div>
-    </div>
-
-    <div class="body">
-      <div class="cards">
-        <article class="card">
-          <div class="card-hd"><span class="ic" style="background:#F5C518;color:#101828">B</span><h3>Blinkit</h3></div>
-          <div class="kpis">
-            <div class="kpi"><div class="k">Assortment</div><div class="v">15</div><div class="d nu">No change</div></div>
-            <div class="kpi"><div class="k">DS listing</div><div class="v">51.4%</div><div class="d dn">−0.2pp</div></div>
-            <div class="kpi"><div class="k">DSA</div><div class="v">88.0%</div><div class="d dn">−0.2pp</div></div>
-            <div class="kpi"><div class="k">Wt. DSA</div><div class="v">85.0%</div><div class="d dn">−0.7pp</div></div>
-          </div>
-          <div class="card-ft"><span>Estimated sales loss</span><b>₹2.4L</b></div>
-        </article>
-
-        <article class="card">
-          <div class="card-hd"><span class="ic" style="background:#3C1A5B">Z</span><h3>Zepto</h3></div>
-          <div class="kpis">
-            <div class="kpi"><div class="k">Assortment</div><div class="v">31</div><div class="d nu">No change</div></div>
-            <div class="kpi"><div class="k">DS listing</div><div class="v">81.0%</div><div class="d up">+15.3pp</div></div>
-            <div class="kpi"><div class="k">DSA</div><div class="v">99.5%</div><div class="d up">+0.4pp</div></div>
-            <div class="kpi"><div class="k">Wt. DSA</div><div class="v">98.7%</div><div class="d up">+0.2pp</div></div>
-          </div>
-          <div class="card-ft"><span>Estimated sales loss</span><b>₹21K</b></div>
-        </article>
-
-        <article class="card">
-          <div class="card-hd"><span class="ic" style="background:#F26D21">I</span><h3>Instamart</h3><span class="badge b-nu">Partial</span></div>
-          <div class="kpis">
-            <div class="kpi"><div class="k">Assortment</div><div class="v">28</div><div class="d nu">No change</div></div>
-            <div class="kpi"><div class="k">DS listing</div><div class="v">69.4%</div><div class="d up">+42.1pp</div></div>
-            <div class="kpi"><div class="k">DSA</div><div class="v nu">—</div><div class="d nu">Not available</div></div>
-            <div class="kpi"><div class="k">Wt. DSA</div><div class="v nu">—</div><div class="d nu">Not available</div></div>
-          </div>
-          <div class="card-ft"><span>Estimated sales loss</span><b style="color:var(--g500)">—</b></div>
-        </article>
-      </div>
-
-      <section class="panel">
-        <div class="panel-hd">
-          <h2>Availability by SKU</h2>
-          <div class="right">
-            <select class="sel" aria-label="Group by"><option>Group by SKU</option><option>Group by city</option></select>
-            <button class="btn" type="button">Download</button>
-          </div>
-          <p class="sub">Seven days to 5 Sept 2026, compared with the previous seven days.</p>
-        </div>
-        <div class="filters">
-          <select class="sel" aria-label="City"><option>City: Pan India</option></select>
-          <select class="sel" aria-label="SKU"><option>SKU: All</option></select>
-          <select class="sel" aria-label="Segment"><option>Segment: All</option></select>
-        </div>
-        <div class="tw">
-          <table>
-            <thead><tr>
-              <th>SKU</th><th>DS listing</th><th>DSA</th><th>Sales</th><th>Wt. DSA</th><th>₹ at risk</th>
-            </tr></thead>
-            <tbody>
-              <tr>
-                <td><span class="nm">No-Nonsense Plant Protein</span><span>1 kg</span></td>
-                <td><div class="stack"><span class="v">80.5%</span><span class="badge b-up">2.2pp</span></div></td>
-                <td><div class="stack"><span class="v">88.6%</span><span class="badge b-dn">0.3pp</span></div></td>
-                <td><span class="v">₹21.2L</span></td>
-                <td><div class="stack"><span class="v">89.5%</span><span class="badge b-dn">1.0pp</span></div></td>
-                <td><div class="prog"><span class="track"><i style="width:100%"></i></span><span class="v">₹59.3K</span></div></td>
-              </tr>
-              <tr>
-                <td><span class="nm">No-Nonsense Plant Protein</span><span>Chikmagalur Mocha · 500 g</span></td>
-                <td><div class="stack"><span class="v">43.7%</span><span class="badge b-up">4.0pp</span></div></td>
-                <td><div class="stack"><span class="v">76.1%</span><span class="badge b-dn">1.7pp</span></div></td>
-                <td><span class="v">₹5.6L</span></td>
-                <td><div class="stack"><span class="v">73.5%</span><span class="badge b-dn">3.7pp</span></div></td>
-                <td><div class="prog"><span class="track"><i style="width:71%"></i></span><span class="v">₹42.4K</span></div></td>
-              </tr>
-              <tr>
-                <td><span class="nm">No-Nonsense Plant Protein</span><span>Indonesian Cacao · 500 g</span></td>
-                <td><div class="stack"><span class="v">42.1%</span><span class="badge b-dn">0.7pp</span></div></td>
-                <td><div class="stack"><span class="v">84.3%</span><span class="badge b-dn">0.9pp</span></div></td>
-                <td><span class="v">₹9.5L</span></td>
-                <td><div class="stack"><span class="v">81.2%</span><span class="badge b-up">0.7pp</span></div></td>
-                <td><div class="prog"><span class="track"><i style="width:54%"></i></span><span class="v">₹32.3K</span></div></td>
-              </tr>
-              <tr>
-                <td><span class="nm">No-Nonsense Plant Protein</span><span>Assorted · 5 × 38 g</span></td>
-                <td><div class="stack"><span class="v">46.2%</span><span class="badge b-up">5.0pp</span></div></td>
-                <td><div class="stack"><span class="v">79.2%</span><span class="badge b-dn">1.1pp</span></div></td>
-                <td><span class="v">₹4.6L</span></td>
-                <td><div class="stack"><span class="v">78.7%</span><span class="badge b-up">0.5pp</span></div></td>
-                <td><div class="prog"><span class="track"><i style="width:49%"></i></span><span class="v">₹28.8K</span></div></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </div>
-  </section>
-
-  <!-- ================= D3 · SLATE ================= -->
-  <section id="d3" role="tabpanel" aria-labelledby="t3" hidden>
-    <aside class="side">
-      <div class="logo"><i></i>ShelfRadar</div>
-      <nav class="nav">
-        <a href="#" class="on"><i></i>Availability</a>
-        <a href="#"><i></i>Visibility</a>
-        <a href="#"><i></i>Pricing</a>
-        <a href="#"><i></i>Inventory</a>
-        <a href="#"><i></i>Segment share</a>
-        <a href="#"><i></i>Alerts</a>
-        <a href="#"><i></i>Ask</a>
-      </nav>
-      <div class="side-ft">Jupiter<br>Data till 5 Sept 26</div>
-    </aside>
-
-    <div class="main">
-      <div class="bar">
-        <h1>Availability</h1>
-        <span class="sub">3,997 dark stores · selling price</span>
-        <div class="rt">
-          <button class="ctl" type="button">City: Pan India</button>
-          <button class="ctl" type="button">SKU: All</button>
-          <button class="ctl" type="button">Segment: All</button>
-          <div class="sw">
-            <button type="button" aria-pressed="false">MTD</button>
-            <button type="button" aria-pressed="true">7D</button>
-            <button type="button" aria-pressed="false">30D</button>
-          </div>
-          <button class="ctl" type="button">Export</button>
-        </div>
-      </div>
-
-      <div class="content">
-        <div class="tiles">
-          <div class="tile">
-            <div class="k"><b>DS listing</b></div>
-            <div class="v n">51.4%</div>
-            <div class="f"><span class="chip c-dn">−0.2pp</span>of 3,997 dark stores</div>
-          </div>
-          <div class="tile">
-            <div class="k"><b>In stock (DSA)</b></div>
-            <div class="v n">88.0%</div>
-            <div class="f"><span class="chip c-dn">−0.2pp</span>of listed stores only</div>
-          </div>
-          <div class="tile">
-            <div class="k"><b>Sales-weighted DSA</b></div>
-            <div class="v n">85.0%</div>
-            <div class="f"><span class="chip c-dn">−0.7pp</span>weighted by store GMV</div>
-          </div>
-          <div class="tile risk">
-            <div class="k"><b>Sales at risk</b></div>
-            <div class="v n">₹2.4L</div>
-            <div class="f"><span class="chip c-nu">7 days</span>estimated sales loss</div>
-          </div>
-        </div>
-
-        <div class="row2">
-          <div class="card">
-            <div class="card-hd">
-              <h2>Listed vs in stock</h2>
-              <span class="s">all platforms · 7 days</span>
-              <div class="rt lg">
-                <span><i style="background:#1F6F5C"></i>In stock</span>
-                <span><i style="background:#9AA5B1"></i>DS listing</span>
-              </div>
-            </div>
-            <div class="card-bd cmp">
-              <div class="cg">
-                <div class="cn">Blinkit</div>
-                <div class="cb"><span>Listed</span><span class="t"><i style="width:51.4%;background:#9AA5B1"></i></span><b class="n">51.4%</b></div>
-                <div class="cb"><span>In stock</span><span class="t"><i style="width:88%;background:#1F6F5C"></i></span><b class="n">88.0%</b></div>
-              </div>
-              <div class="cg">
-                <div class="cn">Zepto</div>
-                <div class="cb"><span>Listed</span><span class="t"><i style="width:81%;background:#9AA5B1"></i></span><b class="n">81.0%</b></div>
-                <div class="cb"><span>In stock</span><span class="t"><i style="width:99.5%;background:#1F6F5C"></i></span><b class="n">99.5%</b></div>
-              </div>
-              <div class="cg">
-                <div class="cn">Instamart</div>
-                <div class="cb"><span>Listed</span><span class="t"><i style="width:69.4%;background:#9AA5B1"></i></span><b class="n">69.4%</b></div>
-                <div class="cb"><span>In stock</span><span class="t"></span><b class="n" style="color:var(--tx3)">—</b></div>
-              </div>
-              <div class="cax"><span>0%</span><span>50%</span><span>100%</span></div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-hd"><h2>Platforms</h2><span class="s">at risk, 7d</span></div>
-            <div class="card-bd plats">
-              <div class="prow">
-                <span class="nm"><i style="background:#F5C518"></i>Blinkit</span>
-                <span class="rk n">₹2.4L</span>
-                <span class="mt">Listed <b class="n">51.4%</b><span>In stock <b class="n">88.0%</b></span><span>SKUs <b class="n">15</b></span></span>
-              </div>
-              <div class="prow">
-                <span class="nm"><i style="background:#3C1A5B"></i>Zepto</span>
-                <span class="rk n">₹21K</span>
-                <span class="mt">Listed <b class="n">81.0%</b><span>In stock <b class="n">99.5%</b></span><span>SKUs <b class="n">31</b></span></span>
-              </div>
-              <div class="prow">
-                <span class="nm"><i style="background:#F26D21"></i>Instamart</span>
-                <span class="rk n" style="color:var(--tx3)">—</span>
-                <span class="mt">Listed <b class="n">69.4%</b><span>In stock <b>—</b></span><span>SKUs <b class="n">28</b></span></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-hd">
-            <h2>Availability by SKU</h2>
-            <span class="s">Pan India · vs previous 7 days</span>
-            <div class="rt">
-              <div class="sw">
-                <button type="button" aria-pressed="true">By SKU</button>
-                <button type="button" aria-pressed="false">By city</button>
-              </div>
-            </div>
-          </div>
-          <div class="tw">
-            <table>
-              <thead><tr><th>SKU</th><th>DS listing</th><th>In stock</th><th>Sales</th><th>Wt. in stock</th><th>Sales at risk</th></tr></thead>
-              <tbody>
-                <tr>
-                  <td><span class="sku">No-Nonsense Plant Protein</span><span>1 kg</span></td>
-                  <td><span class="st"><span class="val n">80.5%</span><span class="chip c-up">+2.2pp</span></span></td>
-                  <td><span class="st"><span class="val n">88.6%</span><span class="chip c-dn">−0.3pp</span></span></td>
-                  <td><span class="val n">₹21.2L</span></td>
-                  <td><span class="st"><span class="val n">89.5%</span><span class="chip c-dn">−1.0pp</span></span></td>
-                  <td><span class="rkc"><span class="tr"><i style="width:100%"></i></span><b class="n">₹59.3K</b></span></td>
-                </tr>
-                <tr>
-                  <td><span class="sku">No-Nonsense Plant Protein</span><span>Chikmagalur Mocha · 500 g</span></td>
-                  <td><span class="st"><span class="val n">43.7%</span><span class="chip c-up">+4.0pp</span></span></td>
-                  <td><span class="st"><span class="val n">76.1%</span><span class="chip c-dn">−1.7pp</span></span></td>
-                  <td><span class="val n">₹5.6L</span></td>
-                  <td><span class="st"><span class="val n">73.5%</span><span class="chip c-dn">−3.7pp</span></span></td>
-                  <td><span class="rkc"><span class="tr"><i style="width:71%"></i></span><b class="n">₹42.4K</b></span></td>
-                </tr>
-                <tr>
-                  <td><span class="sku">No-Nonsense Plant Protein</span><span>Indonesian Cacao · 500 g</span></td>
-                  <td><span class="st"><span class="val n">42.1%</span><span class="chip c-dn">−0.7pp</span></span></td>
-                  <td><span class="st"><span class="val n">84.3%</span><span class="chip c-dn">−0.9pp</span></span></td>
-                  <td><span class="val n">₹9.5L</span></td>
-                  <td><span class="st"><span class="val n">81.2%</span><span class="chip c-up">+0.7pp</span></span></td>
-                  <td><span class="rkc"><span class="tr"><i style="width:54%"></i></span><b class="n">₹32.3K</b></span></td>
-                </tr>
-                <tr>
-                  <td><span class="sku">No-Nonsense Plant Protein</span><span>Assorted · 5 × 38 g</span></td>
-                  <td><span class="st"><span class="val n">46.2%</span><span class="chip c-up">+5.0pp</span></span></td>
-                  <td><span class="st"><span class="val n">79.2%</span><span class="chip c-dn">−1.1pp</span></span></td>
-                  <td><span class="val n">₹4.6L</span></td>
-                  <td><span class="st"><span class="val n">78.7%</span><span class="chip c-up">+0.5pp</span></span></td>
-                  <td><span class="rkc"><span class="tr"><i style="width:49%"></i></span><b class="n">₹28.8K</b></span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= D4 · GRAPHITE ================= -->
-  <section id="d4" role="tabpanel" aria-labelledby="t4" hidden>
-    <div class="top">
-      <span class="bm"><i></i>ShelfRadar</span>
-      <nav>
-        <a href="#" class="on">Availability</a><a href="#">Visibility</a><a href="#">Pricing</a>
-        <a href="#">Inventory</a><a href="#">Segment share</a><a href="#">Alerts</a><a href="#">Ask</a>
-      </nav>
-      <span class="rt">Jupiter · Blinkit</span>
-    </div>
-
-    <div class="tool">
-      <h1>Availability</h1>
-      <button class="f" type="button">City <b>Pan India</b></button>
-      <button class="f" type="button">SKU <b>All</b></button>
-      <button class="f" type="button">Segment <b>All</b></button>
-      <div class="seg">
-        <button type="button" aria-pressed="false">MTD</button>
-        <button type="button" aria-pressed="true">7D</button>
-        <button type="button" aria-pressed="false">30D</button>
-      </div>
-      <div class="seg">
-        <button type="button" aria-pressed="false">MRP</button>
-        <button type="button" aria-pressed="true">SP</button>
-      </div>
-      <span class="rt">5 Sept 2026 · 3,997 DS</span>
-    </div>
-
-    <div class="strip">
-      <div class="kp"><div class="k">Assortment</div><div class="v n">15</div><div class="d nil">No change</div></div>
-      <div class="kp"><div class="k">DS listing</div><div class="v n">51.4%</div><div class="d neg">−0.2pp vs prior 7d</div></div>
-      <div class="kp"><div class="k">In stock · DSA</div><div class="v n">88.0%</div><div class="d neg">−0.2pp vs prior 7d</div></div>
-      <div class="kp"><div class="k">Weighted DSA</div><div class="v n">85.0%</div><div class="d neg">−0.7pp vs prior 7d</div></div>
-      <div class="kp acc"><div class="k">Sales at risk</div><div class="v n">₹2.4L</div><div class="d nil">estimated sales loss · 7d</div></div>
-    </div>
-
-    <div class="split">
-      <div class="pane">
-        <div class="ph"><h2>BY SKU</h2><span class="s">ranked by sales at risk</span><span class="rt">Switch to city view</span></div>
-        <div class="tw">
-          <table>
-            <thead><tr><th>SKU</th><th>Variant</th><th>DS listing</th><th>DSA</th><th>Sales</th><th>Wt. DSA</th><th>At risk</th></tr></thead>
-            <tbody>
-              <tr>
-                <td class="sku">No-Nonsense Plant Protein</td><td>1 kg</td>
-                <td><span class="val n">80.5%</span><span class="dl pos n">+2.2</span></td>
-                <td><span class="val n">88.6%</span><span class="dl neg n">−0.3</span></td>
-                <td><span class="val n">₹21.2L</span></td>
-                <td><span class="val n">89.5%</span><span class="dl neg n">−1.0</span></td>
-                <td><span class="rkc"><span class="tr"><i style="width:100%"></i></span><b class="n">₹59.3K</b></span></td>
-              </tr>
-              <tr>
-                <td class="sku">No-Nonsense Plant Protein <span>Chikmagalur Mocha</span></td><td>500 g</td>
-                <td><span class="val n">43.7%</span><span class="dl pos n">+4.0</span></td>
-                <td><span class="val n">76.1%</span><span class="dl neg n">−1.7</span></td>
-                <td><span class="val n">₹5.6L</span></td>
-                <td><span class="val n">73.5%</span><span class="dl neg n">−3.7</span></td>
-                <td><span class="rkc"><span class="tr"><i style="width:71%"></i></span><b class="n">₹42.4K</b></span></td>
-              </tr>
-              <tr>
-                <td class="sku">No-Nonsense Plant Protein <span>Indonesian Cacao</span></td><td>500 g</td>
-                <td><span class="val n">42.1%</span><span class="dl neg n">−0.7</span></td>
-                <td><span class="val n">84.3%</span><span class="dl neg n">−0.9</span></td>
-                <td><span class="val n">₹9.5L</span></td>
-                <td><span class="val n">81.2%</span><span class="dl pos n">+0.7</span></td>
-                <td><span class="rkc"><span class="tr"><i style="width:54%"></i></span><b class="n">₹32.3K</b></span></td>
-              </tr>
-              <tr>
-                <td class="sku">No-Nonsense Plant Protein <span>Assorted</span></td><td>5 × 38 g</td>
-                <td><span class="val n">46.2%</span><span class="dl pos n">+5.0</span></td>
-                <td><span class="val n">79.2%</span><span class="dl neg n">−1.1</span></td>
-                <td><span class="val n">₹4.6L</span></td>
-                <td><span class="val n">78.7%</span><span class="dl pos n">+0.5</span></td>
-                <td><span class="rkc"><span class="tr"><i style="width:49%"></i></span><b class="n">₹28.8K</b></span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="ph" style="border-top:1px solid var(--ln)"><h2>BY CITY</h2><span class="s">expanded: Delhi</span><span class="rt">Collapse</span></div>
-        <div class="tw">
-          <table>
-            <thead><tr><th>City / SKU</th><th>Variant</th><th>DS listing</th><th>DSA</th><th>Sales</th><th>Wt. DSA</th><th>At risk</th></tr></thead>
-            <tbody>
-              <tr>
-                <td class="sku">Delhi</td><td class="nil">—</td>
-                <td><span class="val n">92.8%</span><span class="dl pos n">+0.8</span></td>
-                <td><span class="val n">79.7%</span><span class="dl pos n">+0.6</span></td>
-                <td><span class="val n">₹8.1L</span><span class="dl pos n">+10.9</span></td>
-                <td><span class="val n">74.5%</span><span class="dl pos n">+3.2</span></td>
-                <td><span class="rkc"><span class="tr"><i style="width:100%"></i></span><b class="n">₹60.1K</b></span></td>
-              </tr>
-              <tr>
-                <td style="padding-left:40px">No-Nonsense Plant Protein</td><td>1 kg</td>
-                <td><span class="val n">84.9%</span><span class="dl pos n">+0.8</span></td>
-                <td><span class="val n">75.9%</span><span class="dl neg n">−0.1</span></td>
-                <td><span class="val n">₹1.7L</span><span class="dl pos n">+66.3</span></td>
-                <td class="nil">—</td>
-                <td><span class="rkc"><span class="tr"><i style="width:24%"></i></span><b class="n">₹14.6K</b></span></td>
-              </tr>
-              <tr>
-                <td style="padding-left:40px">No-Nonsense Plant Protein <span>Indonesian Cacao</span></td><td>500 g</td>
-                <td><span class="val n">15.1%</span><span class="dl neg n">−4.4</span></td>
-                <td><span class="val n">79.0%</span><span class="dl pos n">+19.7</span></td>
-                <td><span class="val n">₹1.2L</span><span class="dl pos n">+1.4</span></td>
-                <td class="nil">—</td>
-                <td><span class="rkc"><span class="tr"><i style="width:11%"></i></span><b class="n">₹6.6K</b></span></td>
-              </tr>
-              <tr>
-                <td style="padding-left:40px">No-Nonsense Plant Protein <span>Chikmagalur Mocha</span></td><td>500 g</td>
-                <td><span class="val n">13.8%</span><span class="dl neg n">−4.8</span></td>
-                <td><span class="val n">64.2%</span><span class="dl pos n">+4.4</span></td>
-                <td><span class="val n">₹73.6K</span><span class="dl pos n">+0.5</span></td>
-                <td class="nil">—</td>
-                <td><span class="rkc"><span class="tr"><i style="width:13%"></i></span><b class="n">₹7.9K</b></span></td>
-              </tr>
-              <tr>
-                <td style="padding-left:40px">Fermented Yeast Protein</td><td>1 kg</td>
-                <td><span class="val n">13.8%</span></td>
-                <td><span class="val n">68.9%</span></td>
-                <td><span class="val n">₹59.9K</span></td>
-                <td class="nil">—</td>
-                <td><span class="rkc"><span class="tr"><i style="width:9%"></i></span><b class="n">₹5.2K</b></span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="pane side">
-        <div class="ph"><h2>PLATFORMS</h2></div>
-        <div class="lgrp">
-          <div class="lrow"><span class="nm">Blinkit · 51.4% listed</span><span class="vv n">₹2.4L</span><span class="tr"><i style="width:100%"></i></span></div>
-          <div class="lrow"><span class="nm">Zepto · 81.0% listed</span><span class="vv n">₹21K</span><span class="tr"><i style="width:9%"></i></span></div>
-          <div class="lrow"><span class="nm">Instamart · 69.4% listed</span><span class="vv n" style="color:var(--tx3)">—</span><span class="tr"></span></div>
-        </div>
-
-        <div class="ph"><h2>TOP SKUs AT RISK</h2></div>
-        <div class="lgrp">
-          <div class="lrow"><span class="nm">Plant Protein 1 kg</span><span class="vv n">₹59.3K</span><span class="tr"><i style="width:100%"></i></span></div>
-          <div class="lrow"><span class="nm">Chikmagalur Mocha 500 g</span><span class="vv n">₹42.4K</span><span class="tr"><i style="width:71%"></i></span></div>
-          <div class="lrow"><span class="nm">Indonesian Cacao 500 g</span><span class="vv n">₹32.3K</span><span class="tr"><i style="width:54%"></i></span></div>
-          <div class="lrow"><span class="nm">Assorted 5 × 38 g</span><span class="vv n">₹28.8K</span><span class="tr"><i style="width:49%"></i></span></div>
-        </div>
-
-        <div class="ph"><h2>DEFINITIONS</h2></div>
-        <div class="defs">
-          <div class="dfr"><span class="k">DS listing</span><span class="x">listed obs ÷ store obs</span></div>
-          <div class="dfr"><span class="k">DSA</span><span class="x">in stock ÷ listed obs</span></div>
-          <div class="dfr"><span class="k">Wt. DSA</span><span class="x">GMV-weighted view of DSA</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
+    <section class="dir" id="d1" role="tabpanel" aria-labelledby="t1"></section>
+    <section class="dir" id="d2" role="tabpanel" aria-labelledby="t2" hidden></section>
+    <section class="dir" id="d3" role="tabpanel" aria-labelledby="t3" hidden></section>
+    <section class="dir" id="d4" role="tabpanel" aria-labelledby="t4" hidden></section>
   </div>
 </div>
 
 <script>
+/* ============================================================
+   ShelfRadar · Availability — every value transcribed from the
+   captured screenshots. null means the value was clipped or not
+   legible in the source and is rendered as an explicit gap.
+   ============================================================ */
+var D = {
+  meta: {
+    page: "Availability",
+    till: "5 Sept 26",
+    stores: "3,997",
+    brand: "Jupiter",
+    ranges: ["MTD", "7D", "30D"], range: "7D",
+    price: ["MRP", "SP"], priceOn: "SP",
+    basis: "vs previous 7 days"
+  },
+
+  platforms: [
+    { name:"Blinkit",   mark:"B", color:"#F5C518", ink:"#101828", assort:15,
+      list:51.4, dList:-0.2, dsa:88.0, dDsa:-0.2, wdsa:85.0, dWdsa:-0.7, loss:"₹2.4L" },
+    { name:"Zepto",     mark:"Z", color:"#3C1A5B", ink:"#fff", assort:31,
+      list:81.0, dList:15.3, dsa:99.5, dDsa:0.4, wdsa:98.7, dWdsa:0.2, loss:"₹21K" },
+    { name:"Instamart", mark:"I", color:"#F26D21", ink:"#fff", assort:28,
+      list:69.4, dList:42.1, dsa:null, dDsa:null, wdsa:null, dWdsa:null, loss:null }
+  ],
+
+  skus: [
+    { name:"No-Nonsense Plant Protein", sub:"", variant:"1 kg",
+      list:80.5, dList:2.2, dsa:88.6, dDsa:-0.3, sales:"₹21.2L", dSales:6.8,
+      wdsa:89.5, dWdsa:-1.0, risk:"₹59.3K", pct:100 },
+    { name:"No-Nonsense Plant Protein", sub:"Chikmagalur Mocha", variant:"500 g",
+      list:43.7, dList:4.0, dsa:76.1, dDsa:-1.7, sales:"₹5.6L", dSales:-0.6,
+      wdsa:73.5, dWdsa:-3.7, risk:"₹42.4K", pct:71 },
+    { name:"No-Nonsense Plant Protein", sub:"Indonesian Cacao", variant:"500 g",
+      list:42.1, dList:-0.7, dsa:84.3, dDsa:-0.9, sales:"₹9.5L", dSales:-9.0,
+      wdsa:81.2, dWdsa:0.7, risk:"₹32.3K", pct:54 },
+    { name:"No-Nonsense Plant Protein", sub:"Assorted", variant:"5 × 38 g",
+      list:46.2, dList:5.0, dsa:79.2, dDsa:-1.1, sales:"₹4.6L", dSales:1.2,
+      wdsa:78.7, dWdsa:0.5, risk:"₹28.8K", pct:49 }
+  ],
+
+  city: {
+    name:"Delhi", list:92.8, dList:0.8, dsa:79.7, dDsa:0.6, sales:"₹8.1L", dSales:10.9,
+    wdsa:74.5, dWdsa:3.2, risk:"₹60.1K", pct:100,
+    skus: [
+      { name:"No-Nonsense Plant Protein", sub:"", variant:"1 kg",
+        list:84.9, dList:0.8, dsa:75.9, dDsa:-0.1, sales:"₹1.7L", dSales:66.3,
+        wdsa:null, dWdsa:null, risk:"₹14.6K", pct:24 },
+      { name:"No-Nonsense Plant Protein", sub:"Indonesian Cacao", variant:"500 g",
+        list:15.1, dList:-4.4, dsa:79.0, dDsa:19.7, sales:"₹1.2L", dSales:1.4,
+        wdsa:null, dWdsa:null, risk:"₹6.6K", pct:11 },
+      { name:"No-Nonsense Plant Protein", sub:"Chikmagalur Mocha", variant:"500 g",
+        list:13.8, dList:-4.8, dsa:64.2, dDsa:4.4, sales:"₹73.6K", dSales:0.5,
+        wdsa:null, dWdsa:null, risk:"₹7.9K", pct:13 },
+      { name:"Fermented Yeast Protein", sub:"", variant:"1 kg",
+        list:13.8, dList:null, dsa:68.9, dDsa:null, sales:"₹59.9K", dSales:null,
+        wdsa:null, dWdsa:null, risk:"₹5.2K", pct:9 }
+    ]
+  },
+
+  heat: {
+    days: ["Aug 30","Aug 31","Sep 1","Sep 2","Sep 3","Sep 4","Sep 5"],
+    cities: ["Pan India","Mumbai","Delhi","Bangalore","Pune","Hyderabad","Gurugram",
+             "Kolkata","Chennai","Ahmedabad","Bhopal","Jaipur","Patna","Noida","Lucknow","Goa"],
+    note: "Depth-aggregated DSA · grey = no crawl · gap splits W0 | W1 · the top row is the whole estate in scope",
+    missing: "Cell values were not legible in the captured screenshots, so the grid is shown empty rather than filled with invented numbers."
+  },
+
+  competition: {
+    platform: "Blinkit",
+    segments: ["All segments","Pure Plant","Yeast Protein"],
+    rows: [
+      { brand:"Jupiter", you:true, cities:333, list:76.5, dList:-1.4, dsa:88.0, dDsa:0.4, vList:null, vDsa:null, color:"#2563EB" },
+      { brand:"SuperYou", cities:336, list:77.2, dList:-0.5, dsa:70.9, dDsa:-0.7, vList:0.7,  vDsa:-17.1, color:"#DC2626" },
+      { brand:"Ace Blend", cities:96, list:21.5, dList:6.9,  dsa:28.3, dDsa:-3.4, vList:-55.0, vDsa:-59.7, color:"#EA580C" },
+      { brand:"Mille", cities:299, list:17.5, dList:0.1,  dsa:91.4, dDsa:1.3,  vList:-59.0, vDsa:3.4,  color:"#F59E0B" },
+      { brand:"As-It-Is", cities:216, list:17.3, dList:-3.4, dsa:19.4, dDsa:0.9,  vList:-59.2, vDsa:-68.6, color:"#7C3AED" },
+      { brand:"Nutrabay", cities:286, list:17.0, dList:-0.1, dsa:78.8, dDsa:-6.0, vList:-59.5, vDsa:-9.2,  color:"#0891B2" },
+      { brand:"Nakpro", cities:236, list:14.5, dList:-0.6, dsa:85.5, dDsa:3.2,  vList:-62.0, vDsa:-2.5,  color:"#94A3B8" }
+    ]
+  },
+
+  defs: [
+    { k:"DS Listing %", f:"(Total Listed Observations ÷ Total Store Observations) × 100",
+      t:"Share of observed stores where the SKU has at least one active listing." },
+    { k:"DSA %", f:"(Total In-Stock Observations ÷ Total Listed Observations) × 100",
+      t:"Displayed Stock Availability — share of listed stores currently in stock." },
+    { k:"Wt. DSA %", f:"GMV-weighted view of DSA",
+      t:"DSA re-scored by each store's sales potential, to prioritise high-potential stores." }
+  ]
+};
+
+/* ---------- formatting ---------- */
+function pv(v){ return v === null ? "—" : v.toFixed(1) + "%"; }
+function dv(v, suf){
+  if (v === null) return null;
+  var s = v > 0 ? "+" : (v < 0 ? "−" : "");
+  return { cls: v > 0 ? "pos" : (v < 0 ? "neg" : "nu"), t: s + Math.abs(v).toFixed(1) + (suf || "") };
+}
+function dh(v, suf){
+  var o = dv(v, suf);
+  return o ? '<span class="d ' + o.cls + '">' + o.t + "</span>" : '<span class="d nu">—</span>';
+}
+function nm(s){ return s.name + (s.sub ? ' <span class="sub">' + s.sub + "</span>" : ""); }
+
+/* ---------- breadth × reliability scatter ---------- */
+function scatter(o){
+  var W = 620, H = 340, L = 54, R = 90, T = 18, B = 46;
+  var px = function(v){ return L + (v / 100) * (W - L - R); };
+  var py = function(v){ return H - B - (v / 100) * (H - T - B); };
+  var g = "", ticks = [0, 25, 50, 75, 100], i;
+  for (i = 0; i < ticks.length; i++){
+    g += '<line x1="' + px(ticks[i]) + '" y1="' + T + '" x2="' + px(ticks[i]) + '" y2="' + (H - B) + '" stroke="' + o.grid + '" stroke-width="1"/>' +
+         '<line x1="' + L + '" y1="' + py(ticks[i]) + '" x2="' + (W - R) + '" y2="' + py(ticks[i]) + '" stroke="' + o.grid + '" stroke-width="1"/>' +
+         '<text x="' + px(ticks[i]) + '" y="' + (H - B + 18) + '" fill="' + o.axis + '" font-size="10.5" text-anchor="middle" font-family="' + o.font + '">' + ticks[i] + '%</text>' +
+         '<text x="' + (L - 8) + '" y="' + (py(ticks[i]) + 3.5) + '" fill="' + o.axis + '" font-size="10.5" text-anchor="end" font-family="' + o.font + '">' + ticks[i] + '%</text>';
+  }
+  D.competition.rows.forEach(function(r){
+    var x = px(r.list), y = py(r.dsa), right = r.list > 60;
+    g += '<circle cx="' + x + '" cy="' + y + '" r="' + (r.you ? 7 : 5.5) + '" fill="' + r.color + '"' + (r.you ? ' stroke="' + o.ring + '" stroke-width="2.5"' : "") + "/>" +
+      '<text x="' + (right ? x + 12 : x + 12) + '" y="' + (y + 4) + '" fill="' + (r.you ? o.strong : o.axis) + '" font-size="11.5" font-weight="' + (r.you ? 600 : 400) + '" font-family="' + o.font + '">' + r.brand + (r.you ? " (you)" : "") + "</text>";
+  });
+  g += '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 6) + '" fill="' + o.axis + '" font-size="11" text-anchor="middle" font-family="' + o.font + '">DS Listing % → breadth</text>' +
+       '<text transform="translate(14,' + ((T + H - B) / 2) + ') rotate(-90)" fill="' + o.axis + '" font-size="11" text-anchor="middle" font-family="' + o.font + '">DSA % → reliability</text>';
+  return '<svg viewBox="0 0 ' + W + " " + H + '" width="100%" height="' + H + '" role="img" aria-label="Breadth versus reliability. Jupiter sits at 76.5 percent listing and 88.0 percent DSA, broader than every peer except SuperYou and 17 points more reliable than it.">' + g + "</svg>";
+}
+
+/* ---------- empty heat grid ---------- */
+function heatGrid(){
+  var h = '<div class="hx-g" style="grid-template-columns:92px repeat(7,minmax(0,1fr))"><span></span>';
+  D.heat.days.forEach(function(d){ h += '<span class="hx-dt">' + d + "</span>"; });
+  D.heat.cities.forEach(function(c, i){
+    h += '<span class="hx-lb' + (i === 0 ? " is-total" : "") + '">' + c + "</span>";
+    for (var k = 0; k < 7; k++) h += '<span class="hx-c"></span>';
+  });
+  return h + '</div><p class="hx-note">' + D.heat.missing + "</p>";
+}
+
+/* ============================================================
+   ONE STRUCTURE, USED BY ALL FOUR DIRECTIONS.
+   Only the CSS scoped to #d1…#d4 differs.
+   ============================================================ */
+function page(theme){
+  /* ---- header ---- */
+  var head =
+    '<header class="hdr">' +
+      '<h1>' + D.meta.page + "</h1>" +
+      '<span class="meta">Data till ' + D.meta.till + "</span>" +
+      '<span class="dot">·</span>' +
+      '<span class="meta">data across ' + D.meta.stores + " DS</span>" +
+      '<div class="hdr-rt">' +
+        '<div class="pills">' + D.platforms.map(function(p, i){
+          return '<span class="pill' + (i === 0 ? " on" : "") + '" style="--pc:' + p.color + ';--pi:' + p.ink + '">' + p.mark + "</span>";
+        }).join("") + "</div>" +
+        '<div class="seg">' + D.meta.ranges.map(function(r){
+          return '<button type="button" aria-pressed="' + (r === D.meta.range) + '">' + r + "</button>";
+        }).join("") + "</div>" +
+        '<div class="seg">' + D.meta.price.map(function(r){
+          return '<button type="button" aria-pressed="' + (r === D.meta.priceOn) + '">' + r + "</button>";
+        }).join("") + "</div>" +
+        '<button class="brand" type="button">' + D.meta.brand + " ▾</button>" +
+      "</div>" +
+    "</header>";
+
+  /* ---- brand cards ---- */
+  var cards = '<div class="cards">' + D.platforms.map(function(p, i){
+    function m(k, v, d){
+      var o = dv(d, "pp");
+      return '<div class="pc-m"><span class="k">' + k + '</span><b class="v' + (v === "—" ? " nu" : "") + '">' + v + "</b>" +
+        '<span class="d ' + (o ? o.cls : "nu") + '">' + (o ? o.t : "—") + "</span></div>";
+    }
+    return '<article class="pcard' + (i === 0 ? " is-on" : "") + '">' +
+      '<div class="pc-hd"><span class="ic" style="background:' + p.color + ";color:" + p.ink + '">' + p.mark + "</span>" +
+        "<h2>" + p.name + "</h2>" +
+        (i === 0 ? '<span class="tag">Viewing</span>' : (p.dsa === null ? '<span class="tag warn">Partial data</span>' : "")) + "</div>" +
+      '<div class="pc-grid">' +
+        m("Assortment", String(p.assort), null) +
+        m("DS Listing", pv(p.list), p.dList) +
+        m("DSA", pv(p.dsa), p.dDsa) +
+        m("Wt. DSA", pv(p.wdsa), p.dWdsa) +
+      "</div>" +
+      '<div class="pc-ft"><span>Estimated sales loss</span><b' + (p.loss ? "" : ' class="nu"') + ">" + (p.loss || "—") + "</b></div>" +
+    "</article>";
+  }).join("") + "</div>";
+
+  /* ---- tables ---- */
+  function row(s, indent){
+    return "<tr>" +
+      '<td class="c-nm"' + (indent ? ' style="padding-left:44px"' : "") + '><span class="nm">' + nm(s) + '</span><span class="vr">' + s.variant + "</span></td>" +
+      '<td><b>' + pv(s.list) + "</b>" + dh(s.dList, "pp") + "</td>" +
+      '<td><b>' + pv(s.dsa) + "</b>" + dh(s.dDsa, "pp") + "</td>" +
+      '<td><b>' + s.sales + "</b>" + dh(s.dSales, "%") + "</td>" +
+      "<td>" + (s.wdsa === null ? '<b class="nu">—</b>' : "<b>" + pv(s.wdsa) + "</b>" + dh(s.dWdsa, "pp")) + "</td>" +
+      '<td><span class="rk"><span class="tr"><i style="width:' + s.pct + '%"></i></span><b>' + s.risk + "</b></span></td></tr>";
+  }
+  var thead = "<thead><tr><th>SKU</th><th>DS Listing %</th><th>DSA %</th><th>Sales ₹</th><th>Wt. DSA %</th><th>₹ at risk</th></tr></thead>";
+  var theadCity = "<thead><tr><th>City / SKU</th><th>DS Listing %</th><th>DSA %</th><th>Sales ₹</th><th>Wt. DSA %</th><th>₹ at risk</th></tr></thead>";
+
+  var cityRow = "<tr class=\"grp\">" +
+    '<td class="c-nm"><span class="nm">' + D.city.name + '</span><span class="vr">4 SKUs · − hide SKUs</span></td>' +
+    '<td><b>' + pv(D.city.list) + "</b>" + dh(D.city.dList, "pp") + "</td>" +
+    '<td><b>' + pv(D.city.dsa) + "</b>" + dh(D.city.dDsa, "pp") + "</td>" +
+    '<td><b>' + D.city.sales + "</b>" + dh(D.city.dSales, "%") + "</td>" +
+    '<td><b>' + pv(D.city.wdsa) + "</b>" + dh(D.city.dWdsa, "pp") + "</td>" +
+    '<td><span class="rk"><span class="tr"><i style="width:100%"></i></span><b>' + D.city.risk + "</b></span></td></tr>";
+
+  var comp = D.competition.rows.map(function(r){
+    return "<tr" + (r.you ? ' class="you"' : "") + ">" +
+      '<td class="c-nm"><span class="nm"><i class="cdot" style="background:' + r.color + '"></i>' + r.brand +
+        (r.you ? ' <em class="ybadge">YOU</em>' : "") + '</span><span class="vr">' + r.cities + " cities seen</span></td>" +
+      '<td><b>' + pv(r.list) + "</b>" + dh(r.dList, "pp") + "</td>" +
+      '<td><b>' + pv(r.dsa) + "</b>" + dh(r.dDsa, "pp") + "</td>" +
+      "<td>" + (r.vList === null ? '<b class="nu">—</b>' : '<b class="' + dv(r.vList).cls + '">' + dv(r.vList, "pp").t + "</b>") + "</td>" +
+      "<td>" + (r.vDsa === null ? '<b class="nu">—</b>' : '<b class="' + dv(r.vDsa).cls + '">' + dv(r.vDsa, "pp").t + "</b>") + "</td></tr>";
+  }).join("");
+
+  /* ---- sections ---- */
+  var overview =
+    '<div data-panel="ov">' +
+      '<div class="fbar"><span class="fl">Filters</span>' +
+        '<button class="fb" type="button">City: Pan India</button>' +
+        '<button class="fb" type="button">SKU: All</button>' +
+        '<button class="fb" type="button">Segment: All</button></div>' +
+
+      '<section class="sec"><div class="sec-hd"><h2>Availability till ' + D.meta.till + "</h2>" +
+        '<span class="s">Pan India · ' + D.meta.basis + "</span>" +
+        '<div class="rt"><div class="seg"><button type="button" aria-pressed="true">By SKU</button><button type="button" aria-pressed="false">By City</button></div>' +
+        '<button class="fb" type="button">Download</button></div></div>' +
+        '<div class="tw"><table>' + thead + "<tbody>" + D.skus.map(function(s){ return row(s, false); }).join("") + "</tbody></table></div></section>" +
+
+      '<section class="sec"><div class="sec-hd"><h2>Availability by city</h2><span class="s">Delhi expanded to its SKUs</span></div>' +
+        '<div class="tw"><table>' + theadCity + "<tbody>" + cityRow + D.city.skus.map(function(s){ return row(s, true); }).join("") + "</tbody></table></div></section>" +
+
+      '<section class="sec"><div class="sec-hd"><h2>Availability heat — city × day</h2><span class="s">' + D.heat.note + '</span><div class="rt"><button class="fb" type="button">CSV</button></div></div>' +
+        '<div class="hx">' + heatGrid() + "</div></section>" +
+    "</div>";
+
+  var competition =
+    '<div data-panel="cp" hidden>' +
+      '<div class="fbar"><span class="fl">Filters</span>' +
+        '<button class="fb" type="button">City: Pan India</button>' +
+        '<button class="fb" type="button">Highlight: none</button>' +
+        '<span class="fl">Segment</span>' +
+        D.competition.segments.map(function(s, i){ return '<button class="fb' + (i === 0 ? " on" : "") + '" type="button">' + s + "</button>"; }).join("") + "</div>" +
+
+      '<section class="sec"><div class="sec-hd"><h2>Shelf presence vs the peer set — ' + D.competition.platform.toUpperCase() + "</h2>" +
+        '<span class="s">' + D.meta.basis + '</span><div class="rt"><button class="fb" type="button">Download</button></div></div>' +
+        '<div class="tw"><table><thead><tr><th>Brand</th><th>DS Listing %</th><th>DSA %</th><th>Listing vs you</th><th>DSA vs you</th></tr></thead><tbody>' + comp + "</tbody></table></div></section>" +
+
+      '<section class="sec"><div class="sec-hd"><h2>Breadth × reliability</h2><span class="s">the same table as one picture</span><div class="rt"><button class="fb" type="button">PNG</button></div></div>' +
+        '<div class="chart">' + scatter(theme) + "</div></section>" +
+
+      '<section class="sec"><div class="sec-hd"><h2>Metric definitions</h2><span class="s">from the Help page</span></div>' +
+        '<div class="defs">' + D.defs.map(function(d){
+          return '<div class="df"><b>' + d.k + "</b><code>" + d.f + "</code><span>" + d.t + "</span></div>";
+        }).join("") + "</div></section>" +
+    "</div>";
+
+  return head + cards +
+    '<div class="vtabs"><button type="button" data-p="ov" class="on">Overview</button><button type="button" data-p="cp">Competition</button></div>' +
+    '<div class="body">' + overview + competition + "</div>";
+}
+
+var THEMES = {
+  d1: { grid:"#1D242A", axis:"#868F99", strong:"#E9ECEF", ring:"#0B0D0F", font:"IBM Plex Mono, monospace" },
+  d2: { grid:"#EAECF0", axis:"#667085", strong:"#101828", ring:"#ffffff", font:"Inter, sans-serif" },
+  d3: { grid:"#EFF1F4", axis:"#8B94A1", strong:"#101418", ring:"#ffffff", font:"Instrument Sans, sans-serif" },
+  d4: { grid:"#EDEFF1", axis:"#828E9C", strong:"#131820", ring:"#ffffff", font:"IBM Plex Sans, sans-serif" }
+};
+
+
 (function(){
   var caps = {
-    t1: "<b>Obsidian</b> — dark instrumentation. Platforms move to a persistent left rail so all three compare at once instead of scrolling in a carousel; the page opens on the money figure and a plain-language read of what the numbers mean. Amber is the only accent; red and green are reserved for direction. Amber signals money at risk, never a brand colour.",
-    t2: "<b>Untitled UI</b> — the library applied honestly. Its real tokens: Inter, the gray-25…900 ramp, primary-600 purple, 8px radii, 1px shadows, pill badges with a leading dot. Familiar SaaS conventions throughout — breadcrumb, page header with actions, tabbed views, filter bar. Fastest to build, most conventional to read.",
-    t3: "<b>Slate</b> — a conventional dashboard, quietly executed. Sidebar nav, filter toolbar, a four-tile KPI row, a chart-plus-summary pair, then the table. No shadows anywhere: hairline borders and whitespace carry the structure. Deep teal for the brand, red reserved for money at risk, so colour always means one thing.",
-    t4: "<b>Graphite</b> — the same conventional layout, tightened. Top nav instead of a sidebar, panels divided by rules rather than floated as cards, and a five-across KPI strip that puts sales at risk beside the metrics that cause it. A right rail keeps platforms, top SKUs at risk and the metric formulas permanently on screen. IBM Plex Sans, IBM blue, more rows per screen."
+    t1: '<b>Obsidian</b> — dark instrumentation. Amber is the only accent and it always means money at risk; red and green are reserved strictly for direction. Monospace numerals so columns of figures align to the digit.',
+    t2: '<b>Untitled UI</b> — the library applied honestly. Its real tokens: Inter, the gray-25…900 ramp, primary-600 purple, 12px card radii, 1px shadows, pill badges. The most conventional and the fastest to build.',
+    t3: '<b>Slate</b> — quiet minimalism. No shadows anywhere; hairline borders and whitespace carry the structure. Deep teal for the brand, red reserved for money at risk, so colour always means one thing.',
+    t4: '<b>Graphite</b> — compact and rule-divided. Square corners, no floating cards, panels separated by 1px rules, tighter rows and a smaller type scale. IBM Plex Sans and IBM blue. Fits noticeably more on one screen.'
   };
+
+  ['d1','d2','d3','d4'].forEach(function(id){
+    document.getElementById(id).innerHTML = page(THEMES[id]);
+  });
+
+  // Overview / Competition switching inside each direction
+  ['d1','d2','d3','d4'].forEach(function(id){
+    var root = document.getElementById(id);
+    var btns = root.querySelectorAll('[data-p]');
+    Array.prototype.forEach.call(btns, function(b){
+      b.addEventListener('click', function(){
+        Array.prototype.forEach.call(btns, function(x){ x.classList.toggle('on', x === b); });
+        Array.prototype.forEach.call(root.querySelectorAll('[data-panel]'), function(p){
+          p.hidden = p.getAttribute('data-panel') !== b.getAttribute('data-p');
+        });
+      });
+    });
+  });
+
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
   var cap = document.getElementById('cap');
   function show(id){
@@ -926,6 +521,5 @@ body{background:#101115;margin:0;font-family:"Inter",system-ui,-apple-system,san
     });
   });
   show('t1');
-
 })();
 </script>
