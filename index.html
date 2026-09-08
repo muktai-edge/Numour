@@ -123,14 +123,15 @@ body{background:#0C0C0E;margin:0;font-family:"Inter",system-ui,-apple-system,san
 #d3 .viz-meters .scale{display:none}
 
 /* d4 · micro columns */
-#d4 .viz-cols{display:grid;grid-template-columns:minmax(0,1fr) 178px;gap:20px;align-items:center}
-#d4 .viz-cols .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 14px}
-#d4 .viz-cols .gr{display:flex;flex-direction:column;gap:2px}
-#d4 .viz-cols .gr .k{font-size:12.5px;color:var(--tx3)}
-#d4 .viz-cols .gr b{font-size:24px;font-weight:600;letter-spacing:-.035em;color:var(--tx);line-height:1.1}
+#d4 .viz-cols{display:flex;flex-direction:column;gap:20px}
+#d4 .viz-cols .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+#d4 .viz-cols .gr{display:flex;flex-direction:column;gap:2px;min-width:0}
+#d4 .viz-cols .gr .k{font-size:12px;color:var(--tx3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#d4 .viz-cols .gr b{font-size:23px;font-weight:600;letter-spacing:-.035em;color:var(--tx);line-height:1.15}
 #d4 .viz-cols .gr .d{font-size:12px;font-weight:500}
-#d4 .viz-cols .ch{min-width:0}
-@media (max-width:1220px){#d4 .viz-cols{grid-template-columns:1fr}#d2 .viz-donut{grid-template-columns:1fr}}
+#d4 .viz-cols .ch{min-width:0;width:100%}
+#d4 .viz-cols .ch svg{display:block;width:100%;height:96px}
+@media (max-width:1220px){#d2 .viz-donut{grid-template-columns:1fr}}
 
 .dir .pc-ft{display:flex;align-items:baseline;justify-content:space-between;padding-top:18px;border-top:1px solid var(--line2)}
 .dir .pc-ft span{font-size:13px;color:var(--tx3)}
@@ -671,24 +672,24 @@ function cardSlate(p){
     '<div class="scale"><span>0%</span><span>50%</span><span>100%</span></div></div>';
 }
 
-/* 4 · GRAPHITE — micro column chart */
+/* 4 · GRAPHITE — metric row + full-width micro column chart */
 function cardGraphite(p){
-  var W = 200, H = 92, base = H - 18, cols = [["List", p.list], ["DSA", p.dsa], ["Wt.", p.wdsa]];
-  var bw = 22, gap = 32, x0 = 22, g = "";
+  var W = 320, H = 96, base = H - 20, cols = [["List", p.list], ["DSA", p.dsa], ["Wt. DSA", p.wdsa]];
+  var slot = W / 3, bw = 26, g = "";
   g += '<line x1="0" y1="' + base + '" x2="' + W + '" y2="' + base + '" stroke="#EEF1F5" stroke-width="1"/>';
   cols.forEach(function(cm, i){
-    var x = x0 + i * (bw + gap), v = cm[1];
+    var cxc = slot * i + slot / 2, x = cxc - bw / 2, v = cm[1];
     if (v === null){
-      g += '<rect x="' + x + '" y="' + (base - 56) + '" width="' + bw + '" height="56" fill="none" stroke="#E8ECF2" stroke-width="1" stroke-dasharray="3 3"/>' +
-           '<text x="' + (x + bw / 2) + '" y="' + (base - 20) + '" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="#8792A3">—</text>';
+      g += '<rect x="' + x + '" y="' + (base - 54) + '" width="' + bw + '" height="54" rx="13" fill="none" stroke="#E4E9F0" stroke-width="1" stroke-dasharray="3 4"/>' +
+           '<text x="' + cxc + '" y="' + (base - 24) + '" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#8792A3">—</text>';
     } else {
-      var h = (v / 100) * 62;
-      g += '<rect x="' + x + '" y="' + (base - h) + '" width="' + bw + '" height="' + h + '" fill="#2563EB" rx="11"/>' +
-           '<text x="' + (x + bw / 2) + '" y="' + (base - h - 5) + '" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" font-weight="600" letter-spacing="-0.3" fill="#0B0F16">' + v.toFixed(1) + "</text>";
+      var h = (v / 100) * 58;
+      g += '<rect x="' + x + '" y="' + (base - h) + '" width="' + bw + '" height="' + h + '" rx="13" fill="#2563EB"/>' +
+           '<text x="' + cxc + '" y="' + (base - h - 7) + '" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" font-weight="600" letter-spacing="-0.3" fill="#0B0F16">' + v.toFixed(1) + "</text>";
     }
-    g += '<text x="' + (x + bw / 2) + '" y="' + (base + 12) + '" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="#8792A3">' + cm[0] + "</text>";
+    g += '<text x="' + cxc + '" y="' + (base + 14) + '" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="#8792A3">' + cm[0] + "</text>";
   });
-  var chart = '<svg viewBox="0 0 ' + W + " " + H + '" width="100%" height="' + H + '" preserveAspectRatio="xMinYMax meet" role="img" aria-label="DS listing ' +
+  var chart = '<svg viewBox="0 0 ' + W + " " + H + '" width="100%" height="' + H + '" preserveAspectRatio="none" role="img" aria-label="DS listing ' +
     p.list.toFixed(1) + ' percent, DSA ' + (p.dsa === null ? "not available" : p.dsa.toFixed(1) + " percent") + '">' + g + "</svg>";
 
   function r(label, val, d){
@@ -794,10 +795,10 @@ function mapPanel(){
 
 (function(){
   var caps = {
-    t1: '<b>Obsidian</b> — dark instrumentation. Amber is the only accent and it always means money at risk; red and green are reserved strictly for direction. Monospace numerals so columns of figures align to the digit.',
-    t2: '<b>Untitled UI</b> — the library applied honestly. Its real tokens: Inter, the gray-25…900 ramp, primary-600 purple, 12px card radii, 1px shadows, pill badges. The most conventional and the fastest to build.',
-    t3: '<b>Slate</b> — quiet minimalism. No shadows anywhere; hairline borders and whitespace carry the structure. Deep teal for the brand, red reserved for money at risk, so colour always means one thing.',
-    t4: '<b>Graphite</b> — compact and rule-divided. Square corners, no floating cards, panels separated by 1px rules, tighter rows and a smaller type scale. IBM Plex Sans and IBM blue. Fits noticeably more on one screen.'
+    t1: '<b>Obsidian</b> — near-black canvas, one warm amber accent, thin ring dials. No borders anywhere: depth comes from surface tint alone. Charcoal sidebar, large light-weight numerals, generous space.',
+    t2: '<b>Untitled UI</b> — the library’s own system: Inter, violet primary, soft pill controls, 16px surfaces, badges with a leading dot, and a shelf-coverage donut per platform. The most familiar of the four.',
+    t3: '<b>Slate</b> — warm stone ground with white surfaces, deep green accent, 22px radii. Capsule meters make each percentage readable without a chart. The calmest and most spacious.',
+    t4: '<b>Graphite</b> — white with tinted zones instead of outlined cards, electric blue, a micro column chart per platform, and a geographic city map in place of the heat grid. The most compact.'
   };
 
   ['d1','d2','d3','d4'].forEach(function(id){
